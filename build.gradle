@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 repositories {
@@ -24,12 +25,9 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'oop.project.App'
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-}
+mainClassName = "mechanicStock.MainApp"

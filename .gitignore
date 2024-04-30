@@ -1,3 +1,6 @@
+.vscode
+
+
 # Ignore Gradle project-specific cache directory
 .gradle
 
@@ -17,7 +20,6 @@ build
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
