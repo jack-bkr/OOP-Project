@@ -30,4 +30,13 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-mainClassName = "mechanicStock.Login"
+sourceSets {
+    main{
+        resources {
+            srcDirs = ['src/main/resources']
+            includes = ['**/*.css', '**/*.jpg', '**/*.png', '**/*.fxml']
+        }
+    }
+}
+
+mainClassName = "mechanicStock.MainApp"
