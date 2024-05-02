@@ -17,17 +17,100 @@
         hgap="10"
         vgap="10"
         styleClass="root"
->
+        minWidth="800">
 
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
 
     <Label fx:id="welcomeLabel"
         id="welcome-text"
         text="Welcome"
         GridPane.columnIndex="0"
         GridPane.rowIndex="0"
-        GridPane.columnSpan="2"
-    />
+        GridPane.columnSpan="2"/>
+
+    <Label
+        GridPane.columnIndex="2"
+        GridPane.rowIndex="0"/>
+
+    <Label 
+        GridPane.columnIndex="3"
+        GridPane.rowIndex="0"/>
+
+    <Label 
+        GridPane.columnIndex="4"
+        GridPane.rowIndex="0"/>
+
+   
+
+    <Label 
+        text="Search: "
+        GridPane.columnIndex="5"
+        GridPane.rowIndex="0"
+        GridPane.halignment="RIGHT"/>
+
+    <TextField fx:id="searchField"
+        GridPane.columnIndex="6"
+        GridPane.rowIndex="0"
+        GridPane.columnSpan="2"/>
+
+
+    <TableView fx:id="stockTable"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        GridPane.columnSpan="8"/>
+
+    <Button fx:id="ViewPartsButton"
+        id="mainWindowButton"
+        text="View Parts"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"/>
+
+    <Button fx:id="ViewVehiclesButton"
+        id="mainWindowButton"
+        text="View Vehicles"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"/>
+    
+    <Button fx:id="ViewUsersButton"
+        id="mainWindowButton"
+        text="View Users"
+        GridPane.columnIndex="2"
+        GridPane.rowIndex="2"/>
+
+    <Button fx:id="PrintAllButton"
+        id="mainWindowButton"
+        text="Print All Stock Information"
+        GridPane.columnIndex="3"
+        GridPane.rowIndex="2"/>
+
+    <Button fx:id="AddStockButton"
+        id="mainWindowButton"
+        text="Add Stock"
+        GridPane.columnIndex="6"
+        GridPane.rowIndex="2"/>
+    
+    <Button fx:id="AddUserButton"
+        id="mainWindowButton"
+        text="Add User"
+        GridPane.columnIndex="7"
+        GridPane.rowIndex="2"/>
 
     <stylesheets>
         <URL value="@Main.css"/>
