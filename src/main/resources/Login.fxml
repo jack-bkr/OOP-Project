@@ -61,6 +61,12 @@
         />
     </HBox>
 
+    <Button fx:id="getLoginInfoButton"
+        text="Get Login Info"
+        onAction="#handleGetLoginInfoButtonAction"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="5"/>
+
     <stylesheets>
         <URL value="@Main.css" />
     </stylesheets>
