@@ -10,9 +10,14 @@ import javafx.stage.Stage;
 public class MainAppController {
     @FXML 
     Label welcomeLabel;
+
+    User user;
+    boolean isAdmin;
     
-    public void recieveUsername(String username) {
-        welcomeLabel.setText("Welcome, " + username + "!");
+    public void recieveUser(User User) {
+        user = User;
+        welcomeLabel.setText("Welcome, " + user.getUserName());
+        isAdmin = user.isAdmin();
     }
 
     public void newScene(String fxmlString, int width, int height) {

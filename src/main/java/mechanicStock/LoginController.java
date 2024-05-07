@@ -5,38 +5,50 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import java.sql.*;
 
 public class LoginController {
-    @FXML private Button loginButton;
-    @FXML private TextField userNameTextField;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private TextField userNameTextField;
+    @FXML private TextField passwordTextField;
+    
 
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws Exception {
+        User user = getUser(userNameTextField.getText());
+
+        if (user == null || !user.checkPassword(passwordTextField.getText())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid Username/Password");
+            alert.setContentText("The Username/Password you entered is incorrect. Please try again.");
+            alert.showAndWait();
+            return;
+        }
+
         Stage stage = (Stage) loginButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MainApp.fxml"));
         Parent root = loader.load();
 
         MainAppController controller = loader.getController();
-        controller.recieveUsername(userNameTextField.getText());
+        controller.recieveUser(user);
 
         Scene changeScene = new Scene(root, 900, 500);
         changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
         stage.setScene(changeScene);
         stage.show();
     }
-
-    @FXML
-    protected void handleGetLoginInfoButtonAction(ActionEvent event) {
-        getLogin();
-    }
     
-    public static void getLogin() {
+    public static User getUser(String userName) {
         String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
-        String query = "SELECT * FROM Users;";
+        String query = "SELECT * FROM Users WHERE userName = '" + userName + "';";
         Connection conn = null;
         Statement stmt = null;
+        User user = null;
         
         try {
             System.out.println("Loading JDBC driver...");
@@ -49,11 +61,7 @@ public class LoginController {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-                System.out.println(rs.getString(3));
-                System.out.println(rs.getBoolean(4));
-                System.out.println(rs.getString(5));
+                user = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("userPassword"), rs.getBoolean("isAdmin"), rs.getString("dateRegistered"));
             }
 
             stmt.close();
@@ -75,5 +83,6 @@ public class LoginController {
                 conn = null;
             }
         }
+        return user;
     }
 }

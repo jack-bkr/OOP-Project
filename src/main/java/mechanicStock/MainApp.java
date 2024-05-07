@@ -1,13 +1,12 @@
 package mechanicStock;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.*;
 
-public class MainApp extends Application{
-    
+public class MainApp extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
@@ -20,8 +19,9 @@ public class MainApp extends Application{
 
         primaryStage.show();
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
 }
+
