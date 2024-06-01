@@ -40,6 +40,7 @@ public class LoginController {
         Scene changeScene = new Scene(root, 900, 500);
         changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
         stage.setScene(changeScene);
+        stage.setTitle("Mechanic Stock Management System");
         stage.show();
     }
     

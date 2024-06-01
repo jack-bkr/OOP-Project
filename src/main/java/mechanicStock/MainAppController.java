@@ -18,40 +18,83 @@ public class MainAppController {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.isAdmin();
-    }
+    } 
 
-    public void newScene(String fxmlString, int width, int height) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlString));
+    @FXML 
+    protected void handleLogoutButton(ActionEvent event) {
+        try { 
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
             Parent root = loader.load();
-            Scene changeScene = new Scene(root, width, height);
+
+            Scene changeScene = new Scene(root, 600, 400);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
             stage.setScene(changeScene);
+            stage.setTitle("Login");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    @FXML 
-    protected void handleLogoutButton(ActionEvent event) {
-        newScene("Login.fxml", 600, 400);
-    }
     
     @FXML 
     protected void handleViewPartsButton(ActionEvent event) {
-        newScene("ViewParts.fxml", 900, 500);
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            Parent root = loader.load();
+
+            ViewController controller = loader.getController();
+            controller.recieveSender(user, "Products");
+
+            Scene changeScene = new Scene(root, 900, 500);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Parts");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     protected void handleViewVehiclesButton(ActionEvent event) {
-        newScene("ViewVehicles.fxml", 900, 500);
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            Parent root = loader.load();
+
+            ViewController controller = loader.getController();
+            controller.recieveSender(user, "Vehicles");
+
+            Scene changeScene = new Scene(root, 900, 500);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Vehicles");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     protected void handleViewUsersButton(ActionEvent event) {
-        newScene("ViewUsers.fxml", 900, 500);
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            Parent root = loader.load();
+
+            ViewController controller = loader.getController();
+            controller.recieveSender(user, "Users");
+
+            Scene changeScene = new Scene(root, 900, 500);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Users");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
@@ -61,12 +104,42 @@ public class MainAppController {
     
     @FXML
     protected void handleAddStockButton(ActionEvent event) {
-        newScene("AddStock.fxml", 400, 600);
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AddStock.fxml"));
+            Parent root = loader.load();
+
+            MainAppController controller = loader.getController();
+            controller.recieveUser(user);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Add Stock");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     protected void handleAddUserButton(ActionEvent event) {
-        newScene("AddUsers.fxml", 400, 600);
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AddUsers.fxml"));
+            Parent root = loader.load();
+
+            MainAppController controller = loader.getController();
+            controller.recieveUser(user);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Add User");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -14,7 +14,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(root, 300, 275);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
 
-        primaryStage.setTitle("Mechanic Stock Management System");
+        primaryStage.setTitle("Login");
         primaryStage.setScene(scene);
 
         primaryStage.show();
