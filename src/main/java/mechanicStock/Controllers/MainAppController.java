@@ -1,4 +1,4 @@
-package mechanicStock;
+package mechanicStock.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import mechanicStock.Classes.User;
 
 public class MainAppController {
     @FXML 
@@ -24,11 +25,11 @@ public class MainAppController {
     protected void handleLogoutButton(ActionEvent event) {
         try { 
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Login.fxml"));
             Parent root = loader.load();
 
             Scene changeScene = new Scene(root, 600, 400);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Login");
             stage.show();
@@ -41,14 +42,14 @@ public class MainAppController {
     protected void handleViewPartsButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
             controller.recieveSender(user, "Products");
 
             Scene changeScene = new Scene(root, 900, 500);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Parts");
             stage.show();
@@ -61,14 +62,14 @@ public class MainAppController {
     protected void handleViewVehiclesButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
             controller.recieveSender(user, "Vehicles");
 
             Scene changeScene = new Scene(root, 900, 500);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Vehicles");
             stage.show();
@@ -81,14 +82,14 @@ public class MainAppController {
     protected void handleViewUsersButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewP-V-U.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
             controller.recieveSender(user, "Users");
 
             Scene changeScene = new Scene(root, 900, 500);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Users");
             stage.show();
@@ -106,14 +107,14 @@ public class MainAppController {
     protected void handleAddStockButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AddStock.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
             Parent root = loader.load();
 
-            MainAppController controller = loader.getController();
-            controller.recieveUser(user);
+            AddController controller = loader.getController();
+            controller.recieveTable("user");
 
             Scene changeScene = new Scene(root, 400, 600);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Add Stock");
             stage.show();
@@ -126,14 +127,14 @@ public class MainAppController {
     protected void handleAddUserButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AddUsers.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
             Parent root = loader.load();
 
-            MainAppController controller = loader.getController();
-            controller.recieveUser(user);
+            AddController controller = loader.getController();
+            controller.recieveTable("user");
 
             Scene changeScene = new Scene(root, 400, 600);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Add User");
             stage.show();

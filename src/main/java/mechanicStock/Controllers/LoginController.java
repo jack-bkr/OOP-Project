@@ -1,4 +1,4 @@
-package mechanicStock;
+package mechanicStock.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +7,8 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import mechanicStock.Classes.User;
+
 import java.sql.*;
 
 public class LoginController {
@@ -31,14 +33,14 @@ public class LoginController {
         }
 
         Stage stage = (Stage) loginButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MainApp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/MainApp.fxml"));
         Parent root = loader.load();
 
         MainAppController controller = loader.getController();
         controller.recieveUser(user);
 
         Scene changeScene = new Scene(root, 900, 500);
-        changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+        changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
         stage.setScene(changeScene);
         stage.setTitle("Mechanic Stock Management System");
         stage.show();

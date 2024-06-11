@@ -1,4 +1,4 @@
-package mechanicStock;
+package mechanicStock.Classes;
 
 public class Vehicle{
     int vehicleID;

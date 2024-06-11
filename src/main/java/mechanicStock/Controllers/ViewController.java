@@ -1,4 +1,4 @@
-package mechanicStock;
+package mechanicStock.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import mechanicStock.Classes.User;
 
 public class ViewController {
     @FXML
@@ -31,14 +32,14 @@ public class ViewController {
     protected void handleAddButton(ActionEvent event) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Add.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
             Parent root = loader.load();
 
             AddController controller = loader.getController();
             controller.recieveTable(table);
 
             Scene changeScene = new Scene(root, 400, 600);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.show();
         } catch (Exception e) {
@@ -50,14 +51,14 @@ public class ViewController {
     protected void handleEditButton(ActionEvent event) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Edit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Edit.fxml"));
             Parent root = loader.load();
 
             EditController controller = loader.getController();
             controller.recieveTable(table, selectedID);
 
             Scene changeScene = new Scene(root, 400, 600);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("Main.css").toExternalForm());
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.show();
         } catch (Exception e) {

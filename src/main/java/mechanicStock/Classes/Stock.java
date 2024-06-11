@@ -1,4 +1,4 @@
-package mechanicStock;
+package mechanicStock.Classes;
 
 public class Stock {
     int stockID;

@@ -12,12 +12,12 @@
 
 <GridPane xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="mechanicStock.MainAppController"
+        fx:controller="mechanicStock.Controllers.ViewController"
         alignment="CENTER"
         hgap="10"
         vgap="10"
         styleClass="root"
-        minWidth="800">
+>
 
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
@@ -45,34 +45,30 @@
         GridPane.rowIndex="0"
         GridPane.columnSpan="2"/>
 
-    <Button fx:id="logoutButton"
-        text="Logout"
-        GridPane.columnIndex="2"
-        GridPane.rowIndex="0"
-        onAction="#handleLogoutButton"/>
-
     <Label
         GridPane.columnIndex="2"
         GridPane.rowIndex="0"/>
 
-    <Label 
+    <Label
         GridPane.columnIndex="3"
-        GridPane.rowIndex="0"/>
+        GridPane.rowIndex="0"/>   
 
-    <Label 
+    <Label
         GridPane.columnIndex="4"
-        GridPane.rowIndex="0"/>
+        GridPane.rowIndex="0"/>   
 
-   
+    <Label
+        GridPane.columnIndex="5"
+        GridPane.rowIndex="0"/>      
 
     <Label 
         text="Search: "
-        GridPane.columnIndex="5"
+        GridPane.columnIndex="6"
         GridPane.rowIndex="0"
         GridPane.halignment="RIGHT"/>
 
     <TextField fx:id="searchField"
-        GridPane.columnIndex="6"
+        GridPane.columnIndex="7"
         GridPane.rowIndex="0"
         GridPane.columnSpan="2"/>
 
@@ -82,50 +78,26 @@
         GridPane.rowIndex="1"
         GridPane.columnSpan="8"/>
 
-    <Button fx:id="ViewPartsButton"
+    <Button fx:id="AddButton"
         id="mainWindowButton"
-        text="View Parts"
+        text="Add"
         GridPane.columnIndex="0"
         GridPane.rowIndex="2"
-        onAction="#handleViewPartsButton"/>
-
-    <Button fx:id="ViewVehiclesButton"
+        onAction="#handleAddButton"/>
+    
+    <Button fx:id="EditButton"
         id="mainWindowButton"
-        text="View Vehicles"
+        text="Edit"
         GridPane.columnIndex="1"
         GridPane.rowIndex="2"
-        onAction="#handleViewVehiclesButton"/>
+        onAction="#handleEditButton"/>
     
-    <Button fx:id="ViewUsersButton"
+    <Button fx:id="DeleteButton"
         id="mainWindowButton"
-        text="View Users"
+        text="Delete"
         GridPane.columnIndex="2"
         GridPane.rowIndex="2"
-        onAction="#handleViewUsersButton"/>
+        onAction="#handleDeleteButton"/>
 
-    <Button fx:id="PrintAllButton"
-        id="mainWindowButton"
-        text="Print All Stock Information"
-        GridPane.columnIndex="3"
-        GridPane.rowIndex="2"
-        onAction="#handlePrintAllButton"/>
-
-    <Button fx:id="AddStockButton"
-        id="mainWindowButton"
-        text="Add Stock"
-        GridPane.columnIndex="6"
-        GridPane.rowIndex="2"
-        onAction="#handleAddStockButton"/>
     
-    <Button fx:id="AddUserButton"
-        id="mainWindowButton"
-        text="Add User"
-        GridPane.columnIndex="7"
-        GridPane.rowIndex="2"
-        onAction="#handleAddUserButton"/>
-
-    <stylesheets>
-        <URL value="@Main.css"/>
-    </stylesheets>
-
 </GridPane>
