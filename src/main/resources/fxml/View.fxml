@@ -73,7 +73,7 @@
         GridPane.columnSpan="2"/>
 
 
-    <TableView fx:id="stockTable"
+    <TableView fx:id="table"
         GridPane.columnIndex="0"
         GridPane.rowIndex="1"
         GridPane.columnSpan="8"/>

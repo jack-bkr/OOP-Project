@@ -77,7 +77,7 @@
         GridPane.columnSpan="2"/>
 
 
-    <TableView fx:id="stockTable"
+    <TableView fx:id="table"
         GridPane.columnIndex="0"
         GridPane.rowIndex="1"
         GridPane.columnSpan="8"/>
@@ -87,7 +87,7 @@
         text="View Parts"
         GridPane.columnIndex="0"
         GridPane.rowIndex="2"
-        onAction="#handleViewPartsButton"/>
+        onAction="#handleViewProductsButton"/>
 
     <Button fx:id="ViewVehiclesButton"
         id="mainWindowButton"

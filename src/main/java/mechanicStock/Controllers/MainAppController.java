@@ -1,16 +1,24 @@
 package mechanicStock.Controllers;
 
+import java.util.ArrayList;
+
+import com.google.common.collect.Table;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import mechanicStock.Classes.User;
+import mechanicStock.Classes.*;
 
 public class MainAppController {
     @FXML 
     Label welcomeLabel;
+    @FXML TableView table;
 
     User user;
     boolean isAdmin;
@@ -18,9 +26,10 @@ public class MainAppController {
     public void recieveUser(User User) {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
-        isAdmin = user.isAdmin();
-    } 
-
+        isAdmin = user.getIsAdmin();
+        
+    }
+    
     @FXML 
     protected void handleLogoutButton(ActionEvent event) {
         try { 
@@ -39,19 +48,20 @@ public class MainAppController {
     }
     
     @FXML 
-    protected void handleViewPartsButton(ActionEvent event) {
+    protected void handleViewProductsButton(ActionEvent event) {
         try { 
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user, "Products");
+            controller.recieveSender(user);
+            controller.recieveProducts(Product.getAllProducts());
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
-            stage.setTitle("Parts");
+            stage.setTitle("Products");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +76,8 @@ public class MainAppController {
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user, "Vehicles");
+            controller.recieveSender(user);
+            controller.recieveVehicles(Vehicle.getAllVehicles());
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
@@ -86,7 +97,8 @@ public class MainAppController {
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user, "Users");
+            controller.recieveSender(user);
+            controller.recieveUsers(User.getAllUsers());
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());

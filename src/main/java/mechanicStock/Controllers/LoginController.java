@@ -47,45 +47,6 @@ public class LoginController {
     }
     
     public static User getUser(String userName) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
-        String query = "SELECT * FROM Users WHERE userName = '" + userName + "';";
-        Connection conn = null;
-        Statement stmt = null;
-        User user = null;
-        
-        try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
-            stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                user = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("userPassword"), rs.getBoolean("isAdmin"), rs.getString("dateRegistered"));
-            }
-
-            stmt.close();
-
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                conn = null;
-            }
-        }
-        return user;
+        return User.getUserByUserName(userName);
     }
 }
