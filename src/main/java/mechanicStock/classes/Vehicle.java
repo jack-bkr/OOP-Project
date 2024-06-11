@@ -1,29 +1,22 @@
-package mechanicStock.Classes;
+package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Vehicle{
     int vehicleID;
+    public void setVehicleID(int ID) { this.vehicleID = ID; } public int getVehicleID() { return vehicleID; }
+
     String vehicleMake;
+    public void setVehicleMake(String Make) { this.vehicleMake = Make; } public String getVehicleMake() { return vehicleMake; }
+
     String vehicleModel;
+    public void setVehicleModel(String Model) { this.vehicleModel = Model; } public String getVehicleModel() { return vehicleModel; }
 
     public Vehicle(int ID, String Make, String Model) {
         this.vehicleID = ID;
         this.vehicleMake = Make;
         this.vehicleModel = Model;
-    }
-
-    public int getVehicleID() {
-        return vehicleID;
-    }
-
-    public String getVehicleMake() {
-        return vehicleMake;
-    }
-
-    public String getVehicleModel() {
-        return vehicleModel;
     }
 
     public static Vehicle getVehicleByID(int ID) {

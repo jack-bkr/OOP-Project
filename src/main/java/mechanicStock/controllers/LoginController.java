@@ -1,4 +1,4 @@
-package mechanicStock.Controllers;
+package mechanicStock.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import mechanicStock.Classes.User;
+import mechanicStock.classes.User;
 
 import java.sql.*;
 

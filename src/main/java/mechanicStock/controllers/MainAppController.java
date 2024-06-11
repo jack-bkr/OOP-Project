@@ -1,8 +1,6 @@
-package mechanicStock.Controllers;
+package mechanicStock.controllers;
 
 import java.util.ArrayList;
-
-import com.google.common.collect.Table;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +11,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import mechanicStock.Classes.*;
+import mechanicStock.classes.*;
 
 public class MainAppController {
     @FXML 
@@ -27,7 +25,43 @@ public class MainAppController {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
+        populateTable(table);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void populateTable(TableView table) {
+        ArrayList<Item> items = Item.getAllItems();
+
+        TableColumn<Item, Integer> stockIDColumn = new TableColumn<>("stockID");
+        stockIDColumn.setCellValueFactory(new PropertyValueFactory<>("stockID"));
+
+        TableColumn<Item, String> vehicleNameColumn = new TableColumn<>("Vehicle Name");
+        vehicleNameColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleName"));
+
+        TableColumn<Item, String> productNameColumn = new TableColumn<>("Product Name");
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+        TableColumn<Item, String> productDescColumn = new TableColumn<>("Product Description");
+        productDescColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
+
+        TableColumn<Item, Integer> quantityColumn = new TableColumn<>("Quantity");
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("stockQuantity"));
+
+        TableColumn<Item, Integer> buyPriceColumn = new TableColumn<>("Buy Price");
+        buyPriceColumn.setCellValueFactory(new PropertyValueFactory<>("buyPrice"));
+
+        TableColumn<Item, Integer> sellPriceColumn = new TableColumn<>("Sell Price");
+        sellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
+
+        table.getColumns().addAll(stockIDColumn, vehicleNameColumn, productNameColumn, productDescColumn, quantityColumn, buyPriceColumn, sellPriceColumn);
         
+        ObservableList<Item> data = FXCollections.observableArrayList();
+        
+        for (Item item : items) {
+            data.add(item);
+        }
+
+        table.setItems(data);
     }
     
     @FXML 
@@ -37,7 +71,7 @@ public class MainAppController {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Login.fxml"));
             Parent root = loader.load();
 
-            Scene changeScene = new Scene(root, 600, 400);
+            Scene changeScene = new Scene(root, 300, 275);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Login");

@@ -1,19 +1,20 @@
-package mechanicStock.Classes;
+package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
+
 public class User {
     private int userID;
-    public void setUserID(int ID) { userID = ID; } public int getUserID() { return userID; }
+    public void setUserID(int ID) { this.userID = ID; } public int getUserID() { return userID; }
 
     private String userName;
-    public void setUserName(String Name) { userName = Name; } public String getUserName() { return userName; }
+    public void setUserName(String Name) { this.userName = Name; } public String getUserName() { return userName; }
 
     private String userPassword;
-    public void setUserPassword(String Password) { userPassword = Password; } public String getUserPassword() { return userPassword; }
+    public void setUserPassword(String Password) { this.userPassword = Password; } public String getUserPassword() { return userPassword; }
 
     private boolean isAdmin;
-    public void setIsAdmin(boolean Admin) { isAdmin = Admin; } public boolean getIsAdmin() { return isAdmin; }
+    public void setIsAdmin(boolean Admin) { this.isAdmin = Admin; } public boolean getIsAdmin() { return isAdmin; }
 
     private Timestamp dateRegistered;
     public Timestamp getDateRegistered() { return dateRegistered; }

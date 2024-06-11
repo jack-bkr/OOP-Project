@@ -1,12 +1,17 @@
-package mechanicStock.Classes;
+package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Product{
-    int productID;
-    String productName;
-    String productDescription;
+    private int productID;
+    public void setProductID(int productID) { this.productID = productID; } public int getProductID() { return productID; } 
+
+    private String productName;
+    public void setProductName(String productName) { this.productName = productName; } public String getProductName() { return productName; } 
+
+    private String productDescription;
+    public void setProductDescription(String productDescription) { this.productDescription = productDescription; } public String getProductDescription() { return productDescription; } 
     
     public Product(int ID, String Name, String Description) {
         this.productID = ID;
@@ -14,17 +19,7 @@ public class Product{
         this.productDescription = Description;
     }
 
-    public int getProductID() {
-        return productID;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
+    
 
     public static Product getProductByID(int ID) {
         String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";

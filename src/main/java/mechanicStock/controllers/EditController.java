@@ -1,4 +1,4 @@
-package mechanicStock.Controllers;
+package mechanicStock.controllers;
 
 public class EditController {
     String table;

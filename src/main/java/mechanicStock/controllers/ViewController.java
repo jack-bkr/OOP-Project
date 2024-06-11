@@ -1,4 +1,4 @@
-package mechanicStock.Controllers;
+package mechanicStock.controllers;
 
 import javafx.collections.*;
 import javafx.event.ActionEvent;
@@ -8,7 +8,8 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import mechanicStock.Classes.*;
+import mechanicStock.classes.*;
+
 import java.util.ArrayList;
 
 import com.google.common.collect.Table;
@@ -78,16 +79,13 @@ public class ViewController {
         TableColumn<User, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
 
-        TableColumn<User, String> passwordColumn = new TableColumn<>("Password");
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<>("userPassword"));
-
         TableColumn<User, Boolean> adminColumn = new TableColumn<>("Admin");
         adminColumn.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
 
         TableColumn<User, String> dateColumn = new TableColumn<>("Date Registered");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateRegistered"));
 
-        table.getColumns().addAll(idColumn, nameColumn, passwordColumn, adminColumn, dateColumn);
+        table.getColumns().addAll(idColumn, nameColumn, adminColumn, dateColumn);
 
         ObservableList<User> data = FXCollections.observableArrayList();
 
