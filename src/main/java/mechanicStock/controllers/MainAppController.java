@@ -16,16 +16,30 @@ import mechanicStock.classes.*;
 public class MainAppController {
     @FXML 
     Label welcomeLabel;
-    @FXML TableView table;
+    @FXML TableView<Item> table;
 
     User user;
     boolean isAdmin;
+    
+    public void initialize() {
+        populateTable(table);
+
+        table.setRowFactory(tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Item rowData = row.getItem();
+                    System.out.println("Double click on: "+rowData);
+                }
+            });
+            return row;
+        });
+    }
     
     public void recieveUser(User User) {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
-        populateTable(table);
     }
 
     @SuppressWarnings("unchecked")

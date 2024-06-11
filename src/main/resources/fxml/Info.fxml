@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?> 
+<?import javafx.geometry.Insets?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="mechanicStock.controllers.InfoController"
+        alignment="CENTER"
+        hgap="10"
+        vgap="10"
+        styleClass="root"
+>
+
+    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+
+    <Label fx:id="idLabel"
+        id="idLabel"
+        text="ID:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0"
+        GridPane.columnSpan="1"/>
+
+    <Label fx:id="idValueLabel"
+        id="idValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="0"
+        GridPane.columnSpan="1"/>
+    
+</GridPane>
