@@ -56,7 +56,7 @@ public class Stock {
             InfoController controller = loader.getController();
             controller.recieveStock(this);
 
-            Scene changeScene = new Scene(root, 400, 600);
+            Scene changeScene = new Scene(root, 400, 400);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Item Info");

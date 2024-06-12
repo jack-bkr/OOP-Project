@@ -5,6 +5,7 @@
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?> 
@@ -21,81 +22,108 @@
 
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
+    <!-- Images -->
+    <Label fx:id="imageLabel"
+        id="imageLabel"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0"
+        visible="false"/>
+
+    <ImageView fx:id="imageView"
+        id="images"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false">
+    </ImageView>
+
+    <Label fx:id="secondaryImageLabel"
+        id="imageLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="0"
+        visible="false"/>
+
+    <ImageView fx:id="secondaryImageView"
+        id="images"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false">
+    </ImageView>
+
     <Label fx:id="idLabel"
         id="idLabel"
         text="ID:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="0"/>
+        GridPane.rowIndex="2"/>
 
     <Label fx:id="idValueLabel"
         id="idValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="0"/>
+        GridPane.rowIndex="2"/>
 
     <!-- Stock Info -->
     <Label fx:id="productIDLabel"
         id="productIDLabel"
         text="Product ID:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="productIDValueLabel"
         id="productIDValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="vehicleIDLabel"
         id="vehicleIDLabel"
         text="Vehicle ID:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <Label fx:id="vehicleIDValueLabel"
         id="vehicleIDValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <Label fx:id="quantityLabel"
         id="quantityLabel"
         text="Quantity:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="3"
+        GridPane.rowIndex="5"
         visible="false"/>
     
     <Label fx:id="quantityValueLabel"
         id="quantityValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="3"
+        GridPane.rowIndex="5"
         visible="false"/>
 
     <Label fx:id="buyPriceLabel"
         id="buyPriceLabel"
         text="Buy Price:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="4"
+        GridPane.rowIndex="6"
         visible="false"/>
     
     <Label fx:id="buyPriceValueLabel"
         id="buyPriceValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="4"
+        GridPane.rowIndex="6"
         visible="false"/>
     
     <Label fx:id="sellPriceLabel"
         id="sellPriceLabel"
         text="Sell Price:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="5"
+        GridPane.rowIndex="7"
         visible="false"/>
 
     <Label fx:id="sellPriceValueLabel"
         id="sellPriceValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="5"
+        GridPane.rowIndex="7"
         visible="false"/>
 
     <!-- Product Info -->
@@ -103,26 +131,26 @@
         id="productNameLabel"
         text="Product Name:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="productNameValueLabel"
         id="productNameValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="productDescriptionLabel"
         id="productDescriptionLabel"
         text="Product Description:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <Label fx:id="productDescriptionValueLabel"
         id="productDescriptionValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <!-- Vehicle Info -->
@@ -130,26 +158,26 @@
         id="vehicleMakeLabel"
         text="Vehicle Make:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="vehicleMakeValueLabel"
         id="vehicleMakeValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="vehicleModelLabel"
         id="vehicleModelLabel"
         text="Vehicle Model:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <Label fx:id="vehicleModelValueLabel"
         id="vehicleModelValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <!-- User Info -->
@@ -157,39 +185,56 @@
         id="userNameLabel"
         text="User Name:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
 
     <Label fx:id="userNameValueLabel"
         id="userNameValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="1"
+        GridPane.rowIndex="3"
         visible="false"/>
     
     <Label fx:id="isAdminLabel"
         id="isAdminLabel"
         text="Admin:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
     
     <Label fx:id="isAdminValueLabel"
         id="isAdminValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
+        GridPane.rowIndex="4"
         visible="false"/>
 
     <Label fx:id="dateRegisteredLabel"
         id="dateRegisteredLabel"
         text="Date Registered:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="3"
+        GridPane.rowIndex="5"
         visible="false"/>
     
     <Label fx:id="dateRegisteredValueLabel"
         id="dateRegisteredValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="3"
+        GridPane.rowIndex="5"
         visible="false"/>
+    
+    <Button fx:id="vehicleInfoButton"
+        id="infoButton"
+        text="Vehicle Info"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="8"
+        visible="false"
+        onAction="#handleVehicleInfoButton"/>
+
+    <Button fx:id="productInfoButton"
+        id="infoButton"
+        text="Product Info"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="8"
+        visible="false"
+        onAction="#handleProductInfoButton"/>
+
     
 </GridPane>

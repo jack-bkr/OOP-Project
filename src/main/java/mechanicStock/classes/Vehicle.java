@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
@@ -37,7 +38,7 @@ public class Vehicle {
             InfoController controller = loader.getController();
             controller.recieveVehicle(this);
 
-            Scene changeScene = new Scene(root, 400, 600);
+            Scene changeScene = new Scene(root, 400, 400);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Item Info");
@@ -45,6 +46,10 @@ public class Vehicle {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Image getImage(int width, int height) {
+        return new Image("/img/vehicle/" + this.vehicleID + ".png", 0, 100, true, false);
     }
 
     public static Vehicle getVehicleByID(int ID) {

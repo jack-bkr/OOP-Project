@@ -1,13 +1,34 @@
 package mechanicStock.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import mechanicStock.classes.*;
 
 public class InfoController {
     // Attributes
+    private Stock stock;
+
+    // FXML Attributes
     @FXML
     private Label idValueLabel;
+
+    // Images
+    @FXML
+    private Label imageLabel;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Label secondaryImageLabel;
+    @FXML
+    private ImageView secondaryImageView;
+    
+    // Buttons
+    @FXML
+    private Button productInfoButton;
+    @FXML
+    private Button vehicleInfoButton;
 
     // Stock
     @FXML
@@ -67,6 +88,25 @@ public class InfoController {
     
     
     public void recieveStock(Stock stock) {
+        this.stock = stock;
+
+        // Set Product and Vehicle Info Buttons visible
+        productInfoButton.setVisible(true);
+        vehicleInfoButton.setVisible(true);
+
+        // Set Images Visible
+        imageLabel.setVisible(true);
+        imageView.setVisible(true);
+        secondaryImageLabel.setVisible(true);
+        secondaryImageView.setVisible(true);
+
+        // Set Image values
+        imageLabel.setText("Vehicle Image");
+        imageView.setImage(stock.vehicle.getImage(0, 100));
+
+        secondaryImageLabel.setText("Product Image");
+        secondaryImageView.setImage(stock.product.getImage(0, 100));
+
         // Set Stock Label Visible
         productIDLabel.setVisible(true);
         vehicleIDLabel.setVisible(true);
@@ -91,6 +131,13 @@ public class InfoController {
     }
 
     public void recieveProduct(Product product) {
+        // Set Images Visible
+        imageLabel.setVisible(true);
+        imageView.setVisible(true);
+
+        // Set Image values
+        imageLabel.setText("Product Image");
+        imageView.setImage(product.getImage(0, 100));
         // Set Product Label Visible
         productNameLabel.setVisible(true);
         productDescriptionLabel.setVisible(true);
@@ -106,6 +153,14 @@ public class InfoController {
     }
 
     public void recieveVehicle(Vehicle vehicle) {
+        // Set Images Visible
+        imageLabel.setVisible(true);
+        imageView.setVisible(true);
+
+        // Set Image values
+        imageLabel.setText("Vehicle Image");
+        imageView.setImage(new Image("/img/vehicle/" + vehicle.getVehicleID() + ".png", 0, 100, true, false));
+
         // Set Vehicle Label Visible
         vehicleMakeLabel.setVisible(true);
         vehicleModelLabel.setVisible(true);
@@ -136,5 +191,15 @@ public class InfoController {
         userNameValueLabel.setText(user.getUserName());
         isAdminValueLabel.setText(String.valueOf(user.getIsAdmin()));
         dateRegisteredValueLabel.setText(String.valueOf(user.getDateRegistered()));
+    }
+
+    @FXML
+    protected void handleProductInfoButton(ActionEvent event) {
+        stock.product.loadInfo();
+    }
+
+    @FXML
+    protected void handleVehicleInfoButton(ActionEvent event) {
+        stock.vehicle.loadInfo();
     }
 }

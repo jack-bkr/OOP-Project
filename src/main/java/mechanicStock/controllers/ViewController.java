@@ -12,8 +12,6 @@ import mechanicStock.classes.*;
 
 import java.util.ArrayList;
 
-import com.google.common.collect.Table;
-
 public class ViewController {
     @FXML
     Label welcomeLabel;
@@ -23,6 +21,7 @@ public class ViewController {
     User user;
     boolean isAdmin;
     int selectedID;
+    String tableType;
 
     public void recieveSender(User User) {
         user = User;
@@ -32,7 +31,8 @@ public class ViewController {
 
     @SuppressWarnings("unchecked")
     public void recieveVehicles(ArrayList<Vehicle> vehicles) {
-
+        tableType = "Vehicles";
+        
         TableColumn<Vehicle, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleID"));
 
@@ -66,6 +66,8 @@ public class ViewController {
 
     @SuppressWarnings("unchecked")
     public void recieveProducts(ArrayList<Product> products) {
+        tableType = "Products";
+
         TableColumn<Product, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
 
@@ -99,6 +101,8 @@ public class ViewController {
 
     @SuppressWarnings("unchecked")
     public void recieveUsers(ArrayList<User> users) {
+        tableType = "Users";
+
         TableColumn<User, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
 

@@ -42,8 +42,9 @@ public class MainAppController {
         isAdmin = user.getIsAdmin();
     }
 
+    
     @SuppressWarnings("unchecked")
-    public static void populateTable(TableView table) {
+    public static void populateTable(TableView<Item> table) {
         ArrayList<Item> items = Item.getAllItems();
 
         TableColumn<Item, Integer> stockIDColumn = new TableColumn<>("stockID");
