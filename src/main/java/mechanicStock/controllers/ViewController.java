@@ -143,9 +143,9 @@ public class ViewController {
             Parent root = loader.load();
 
             AddController controller = loader.getController();
-            //controller.recieveTable(table);
+            controller.recieveTable(this.tableType);
 
-            Scene changeScene = new Scene(root, 400, 600);
+            Scene changeScene = new Scene(root, 325, 400);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.show();
@@ -162,7 +162,7 @@ public class ViewController {
             Parent root = loader.load();
 
             EditController controller = loader.getController();
-            //controller.recieveTable(table, selectedID);
+            controller.recieveTable(this.tableType, this.selectedID);
 
             Scene changeScene = new Scene(root, 400, 600);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());

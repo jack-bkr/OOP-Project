@@ -175,7 +175,7 @@ public class MainAppController {
             AddController controller = loader.getController();
             controller.recieveTable("Stock");
 
-            Scene changeScene = new Scene(root, 400, 600);
+            Scene changeScene = new Scene(root, 325, 400);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Add Stock");

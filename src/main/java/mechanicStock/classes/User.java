@@ -195,6 +195,42 @@ public class User {
         return users;
     }
 
-    public static void registerUser() {
+    public static boolean registerUser(String username, String password) {
+        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String query = "INSERT INTO Users (userName, userPassword, isAdmin, dateRegistered, adminApproved) VALUES ('" + username + "', '" + password + "', FALSE, CURRENT_TIMESTAMP, FALSE);";
+        Connection conn = null;
+        Statement stmt = null;
+        boolean success = false;
+
+        try {
+            System.out.println("Loading JDBC driver...");
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("JDBC driver loaded.");
+
+            conn = DriverManager.getConnection(dbURL);
+            stmt = conn.createStatement();
+
+            stmt.executeUpdate(query);
+
+            stmt.close();
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Closing the connection.");
+            if (conn != null) {
+                try {
+                    conn.close();
+                    success = true;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                conn = null;
+            }
+        }
+        return success;
     }
 }

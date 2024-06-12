@@ -58,11 +58,11 @@ public class AddController {
         if (this.table == "Users") {
             showUser();
         } else if (this.table == "Stock") {
-            // Set up fields for adding a stock item
+            showStock();
         } else if (this.table == "Vehicles") {
-            // Set up fields for adding a vehicle
+            showVehicle();
         } else if (this.table == "Products") {
-            // Set up fields for adding a product
+            showProduct();
         } else {
             throw new IllegalArgumentException("Invalid table name");
         }
@@ -81,8 +81,82 @@ public class AddController {
 
     }
 
+    public void showStock() {
+        titleLabel.setText("Add Stock");
+
+        // Show Stock Fields
+        vehicleLabel.setVisible(true);
+        vehicleComboBox.setVisible(true);
+        productLabel.setVisible(true);
+        productComboBox.setVisible(true);
+        buyPriceLabel.setVisible(true);
+        buyPriceTextField.setVisible(true);
+        sellPriceLabel.setVisible(true);
+        sellPriceTextField.setVisible(true);
+    }
+
+    public void showVehicle() {
+        titleLabel.setText("Add Vehicle");
+
+        // Show Vehicle Fields
+        vehicleMakeLabel.setVisible(true);
+        vehicleMakeTextField.setVisible(true);
+        vehicleModelLabel.setVisible(true);
+        vehicleModelTextField.setVisible(true);
+
+        // Show Image Fields
+        imageSelectLabel.setVisible(true);
+        imageSelectButton.setVisible(true);
+        imageNameLabel.setVisible(true);
+    }
+
+    public void showProduct() {
+        titleLabel.setText("Add Product");
+
+        // Show Product Fields
+        productNameLabel.setVisible(true);
+        productNameTextField.setVisible(true);
+        productDescriptionLabel.setVisible(true);
+        productDescriptionTextField.setVisible(true);
+
+        // Show Image Fields
+        imageSelectLabel.setVisible(true);
+        imageSelectButton.setVisible(true);
+        imageNameLabel.setVisible(true);
+    }
+
     public void addUser() {
-        
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
+        String confirmPassword = confirmPasswordTextField.getText();
+
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled out");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Passwords do not match");
+            alert.showAndWait();
+            return;
+        }
+
+        if (User.registerUser(username, password)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("User registered successfully, awaiting admin approval");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User could not be registered");
+            alert.showAndWait();
+        }
     }
 
     @FXML

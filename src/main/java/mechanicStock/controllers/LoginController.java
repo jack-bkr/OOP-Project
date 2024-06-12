@@ -30,6 +30,15 @@ public class LoginController {
             return;
         }
 
+        if (!user.getAdminApproved()) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Account Not Approved");
+            alert.setContentText("Your account has not been approved by an admin yet. Please try again later.");
+            alert.showAndWait();
+            return;
+        }
+
         Stage stage = (Stage) loginButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/MainApp.fxml"));
         Parent root = loader.load();
