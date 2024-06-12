@@ -11,16 +11,11 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class Vehicle {
-    // Attributes; getters and setters
+    // Attributes; getters
 
-    private int vehicleID;
-    public void setVehicleID(int ID) { this.vehicleID = ID; } public int getVehicleID() { return vehicleID; }
-
-    private String vehicleMake;
-    public void setVehicleMake(String Make) { this.vehicleMake = Make; } public String getVehicleMake() { return vehicleMake; }
-
-    private String vehicleModel;
-    public void setVehicleModel(String Model) { this.vehicleModel = Model; } public String getVehicleModel() { return vehicleModel; }
+    private int vehicleID; public int getVehicleID() { return vehicleID; }
+    private String vehicleMake; public String getVehicleMake() { return vehicleMake; }
+    private String vehicleModel; public String getVehicleModel() { return vehicleModel; }
 
     // Constructor
     public Vehicle(int ID, String Make, String Model) {

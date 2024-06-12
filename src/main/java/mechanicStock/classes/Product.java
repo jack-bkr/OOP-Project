@@ -11,17 +11,11 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class Product {
-    // Attributes; getters and setters
+    // Attributes; getters
 
-    private int productID;
-    public void setProductID(int productID) { this.productID = productID; } public int getProductID() { return productID; } 
-
-    private String productName;
-    public void setProductName(String productName) { this.productName = productName; } public String getProductName() { return productName; } 
-
-    private String productDescription;
-    public void setProductDescription(String productDescription) { this.productDescription = productDescription; } public String getProductDescription() { return productDescription; } 
-    
+    private int productID; public int getProductID() { return productID; } 
+    private String productName; public String getProductName() { return productName; } 
+    private String productDescription; public String getProductDescription() { return productDescription; } 
 
     // Constructor
     public Product(int ID, String Name, String Description) {

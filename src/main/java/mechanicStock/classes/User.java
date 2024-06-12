@@ -10,30 +10,23 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class User {
-    // Attributes; getters and setters
+    // Attributes; getters
 
-    private int userID;
-    public void setUserID(int ID) { this.userID = ID; } public int getUserID() { return userID; }
-
-    private String userName;
-    public void setUserName(String Name) { this.userName = Name; } public String getUserName() { return userName; }
-
-    private String userPassword;
-    public void setUserPassword(String Password) { this.userPassword = Password; } public String getUserPassword() { return userPassword; }
-
-    private boolean isAdmin;
-    public void setIsAdmin(boolean Admin) { this.isAdmin = Admin; } public boolean getIsAdmin() { return isAdmin; }
-
-    private Timestamp dateRegistered;
-    public Timestamp getDateRegistered() { return dateRegistered; }
+    private int userID; public int getUserID() { return userID; }
+    private String userName; public String getUserName() { return userName; }
+    private String userPassword; public String getUserPassword() { return userPassword; }
+    private boolean isAdmin; public boolean getIsAdmin() { return isAdmin; }
+    private Timestamp dateRegistered; public Timestamp getDateRegistered() { return dateRegistered; }
+    private boolean adminApproved; public boolean getAdminApproved() { return adminApproved; }
 
     // Constructor
-    public User(int userID, String userName, String userPassword, boolean isAdmin, Timestamp dateRegistered) {
+    public User(int userID, String userName, String userPassword, boolean isAdmin, Timestamp dateRegistered, boolean adminApproved) {
         this.userID = userID;
         this.userName = userName;
         this.userPassword = userPassword;
         this.isAdmin = isAdmin;
         this.dateRegistered = dateRegistered;
+        this.adminApproved = adminApproved;
     }
     
     // Checks if password is correctc
@@ -78,8 +71,12 @@ public class User {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                user = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("userPassword"),
-                        rs.getBoolean("isAdmin"), rs.getTimestamp("dateRegistered"));
+                user = new User(rs.getInt("userID"),
+                        rs.getString("userName"),
+                        rs.getString("userPassword"),
+                        rs.getBoolean("isAdmin"),
+                        rs.getTimestamp("dateRegistered"),
+                        rs.getBoolean("adminApproved"));
             }
 
             stmt.close();
@@ -125,7 +122,8 @@ public class User {
                         rs.getString("userName"),
                         rs.getString("userPassword"),
                         rs.getBoolean("isAdmin"),
-                        rs.getTimestamp("dateRegistered"));
+                        rs.getTimestamp("dateRegistered"),
+                        rs.getBoolean("adminApproved"));
             }
 
             stmt.close();
@@ -171,7 +169,8 @@ public class User {
                         rs.getString("userName"),
                         rs.getString("userPassword"),
                         rs.getBoolean("isAdmin"),
-                        rs.getTimestamp("dateRegistered"));
+                        rs.getTimestamp("dateRegistered"),
+                        rs.getBoolean("adminApproved"));
                 users.add(user);
             }
 

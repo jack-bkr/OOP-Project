@@ -12,22 +12,13 @@ import mechanicStock.classes.Vehicle;
 import mechanicStock.controllers.InfoController;
 
 public class Stock {
-    // Attributes; getters and setters
+    // Attributes; getters
 
-    private int stockID;
-    public void setStockID(int ID) { this.stockID = ID; } public int getStockID() { return stockID; }
-
-    private int productID;
-    public void setProductID(int ID) { this.productID = ID; } public int getProductID() { return productID; }
-
-    private int vehicleID;
-    public void setVehicleID(int ID) { this.vehicleID = ID; } public int getVehicleID() { return vehicleID; }
-
-    private int stockQuantity;
-    public void setStockQuantity(int Quantity) { this.stockQuantity = Quantity; } public int getStockQuantity() { return stockQuantity; }
-
-    private int buyPrice;
-    public void setBuyPrice(int Price) { this.buyPrice = Price; } public int getBuyPrice() { return buyPrice; }
+    private int stockID; public int getStockID() { return stockID; }
+    private int productID; public int getProductID() { return productID; }
+    private int vehicleID; public int getVehicleID() { return vehicleID; }
+    private int stockQuantity; public int getStockQuantity() { return stockQuantity; }
+    private int buyPrice; public int getBuyPrice() { return buyPrice; }
 
     private int sellPrice;
     public void setSellPrice(int Price) { this.sellPrice = Price; } public int getSellPrice() { return sellPrice; }
