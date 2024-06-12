@@ -3,7 +3,15 @@ package mechanicStock.classes;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Product{
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import mechanicStock.controllers.InfoController;
+
+public class Product {
+    // Attributes; getters and setters
+
     private int productID;
     public void setProductID(int productID) { this.productID = productID; } public int getProductID() { return productID; } 
 
@@ -13,13 +21,32 @@ public class Product{
     private String productDescription;
     public void setProductDescription(String productDescription) { this.productDescription = productDescription; } public String getProductDescription() { return productDescription; } 
     
+
+    // Constructor
     public Product(int ID, String Name, String Description) {
         this.productID = ID;
         this.productName = Name;
         this.productDescription = Description;
     }
 
-    
+    public void loadInfo() {
+        try {
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
+            Parent root = loader.load();
+
+            InfoController controller = loader.getController();
+            controller.recieveProduct(this);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Item Info");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Product getProductByID(int ID) {
         String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";

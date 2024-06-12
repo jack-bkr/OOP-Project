@@ -3,7 +3,15 @@ package mechanicStock.classes;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Vehicle{
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import mechanicStock.controllers.InfoController;
+
+public class Vehicle {
+    // Attributes; getters and setters
+
     int vehicleID;
     public void setVehicleID(int ID) { this.vehicleID = ID; } public int getVehicleID() { return vehicleID; }
 
@@ -13,10 +21,30 @@ public class Vehicle{
     String vehicleModel;
     public void setVehicleModel(String Model) { this.vehicleModel = Model; } public String getVehicleModel() { return vehicleModel; }
 
+    // Constructor
     public Vehicle(int ID, String Make, String Model) {
         this.vehicleID = ID;
         this.vehicleMake = Make;
         this.vehicleModel = Model;
+    }
+
+    public void loadInfo() {
+        try {
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
+            Parent root = loader.load();
+
+            InfoController controller = loader.getController();
+            controller.recieveVehicle(this);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Item Info");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Vehicle getVehicleByID(int ID) {

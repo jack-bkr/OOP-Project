@@ -25,13 +25,171 @@
         id="idLabel"
         text="ID:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="0"
-        GridPane.columnSpan="1"/>
+        GridPane.rowIndex="0"/>
 
     <Label fx:id="idValueLabel"
         id="idValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="0"
-        GridPane.columnSpan="1"/>
+        GridPane.rowIndex="0"/>
+
+    <!-- Stock Info -->
+    <Label fx:id="productIDLabel"
+        id="productIDLabel"
+        text="Product ID:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="productIDValueLabel"
+        id="productIDValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="vehicleIDLabel"
+        id="vehicleIDLabel"
+        text="Vehicle ID:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="vehicleIDValueLabel"
+        id="vehicleIDValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="quantityLabel"
+        id="quantityLabel"
+        text="Quantity:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        visible="false"/>
+    
+    <Label fx:id="quantityValueLabel"
+        id="quantityValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="3"
+        visible="false"/>
+
+    <Label fx:id="buyPriceLabel"
+        id="buyPriceLabel"
+        text="Buy Price:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="4"
+        visible="false"/>
+    
+    <Label fx:id="buyPriceValueLabel"
+        id="buyPriceValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="4"
+        visible="false"/>
+    
+    <Label fx:id="sellPriceLabel"
+        id="sellPriceLabel"
+        text="Sell Price:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="5"
+        visible="false"/>
+
+    <Label fx:id="sellPriceValueLabel"
+        id="sellPriceValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="5"
+        visible="false"/>
+
+    <!-- Product Info -->
+    <Label fx:id="productNameLabel"
+        id="productNameLabel"
+        text="Product Name:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="productNameValueLabel"
+        id="productNameValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="productDescriptionLabel"
+        id="productDescriptionLabel"
+        text="Product Description:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="productDescriptionValueLabel"
+        id="productDescriptionValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <!-- Vehicle Info -->
+    <Label fx:id="vehicleMakeLabel"
+        id="vehicleMakeLabel"
+        text="Vehicle Make:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="vehicleMakeValueLabel"
+        id="vehicleMakeValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="vehicleModelLabel"
+        id="vehicleModelLabel"
+        text="Vehicle Model:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="vehicleModelValueLabel"
+        id="vehicleModelValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <!-- User Info -->
+    <Label fx:id="userNameLabel"
+        id="userNameLabel"
+        text="User Name:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="userNameValueLabel"
+        id="userNameValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+    
+    <Label fx:id="isAdminLabel"
+        id="isAdminLabel"
+        text="Admin:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+    
+    <Label fx:id="isAdminValueLabel"
+        id="isAdminValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="dateRegisteredLabel"
+        id="dateRegisteredLabel"
+        text="Date Registered:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        visible="false"/>
+    
+    <Label fx:id="dateRegisteredValueLabel"
+        id="dateRegisteredValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="3"
+        visible="false"/>
     
 </GridPane>

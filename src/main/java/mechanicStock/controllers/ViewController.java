@@ -30,7 +30,9 @@ public class ViewController {
         isAdmin = user.getIsAdmin();
     }
 
+    @SuppressWarnings("unchecked")
     public void recieveVehicles(ArrayList<Vehicle> vehicles) {
+
         TableColumn<Vehicle, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleID"));
 
@@ -49,8 +51,20 @@ public class ViewController {
         }
 
         table.setItems(data);
+
+        table.setRowFactory(tv -> {
+            TableRow<Vehicle> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Vehicle vehicle = row.getItem();
+                    vehicle.loadInfo();
+                }
+            });
+            return row;
+        });
     }
 
+    @SuppressWarnings("unchecked")
     public void recieveProducts(ArrayList<Product> products) {
         TableColumn<Product, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -70,8 +84,20 @@ public class ViewController {
         }
 
         table.setItems(data);
+
+        table.setRowFactory(tv -> {
+            TableRow<Product> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Product product = row.getItem();
+                    product.loadInfo();
+                }
+            });
+            return row;
+        });
     }
 
+    @SuppressWarnings("unchecked")
     public void recieveUsers(ArrayList<User> users) {
         TableColumn<User, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -94,6 +120,17 @@ public class ViewController {
         }
 
         table.setItems(data);
+
+        table.setRowFactory(tv -> {
+            TableRow<User> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    User user = row.getItem();
+                    user.loadInfo();
+                }
+            });
+            return row;
+        });
     }
 
     @FXML 

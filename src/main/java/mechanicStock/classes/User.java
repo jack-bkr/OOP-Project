@@ -3,7 +3,15 @@ package mechanicStock.classes;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import mechanicStock.controllers.InfoController;
+
 public class User {
+    // Attributes; getters and setters
+
     private int userID;
     public void setUserID(int ID) { this.userID = ID; } public int getUserID() { return userID; }
 
@@ -19,6 +27,7 @@ public class User {
     private Timestamp dateRegistered;
     public Timestamp getDateRegistered() { return dateRegistered; }
 
+    // Constructor
     public User(int userID, String userName, String userPassword, boolean isAdmin, Timestamp dateRegistered) {
         this.userID = userID;
         this.userName = userName;
@@ -26,14 +35,29 @@ public class User {
         this.isAdmin = isAdmin;
         this.dateRegistered = dateRegistered;
     }
-
-    public String toString() {
-        return "User ID: " + userID + "\nUsername: " + userName + "\nPassword: " + userPassword + "\nIs Admin: " + isAdmin
-                + "\nDate Registered: " + dateRegistered;
-    }
     
+    // Checks if password is correctc
     public boolean checkPassword(String password) {
         return userPassword.equals(password);
+    }
+
+    public void loadInfo() {
+        try {
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
+            Parent root = loader.load();
+
+            InfoController controller = loader.getController();
+            controller.recieveUser(this);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Item Info");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static User getUserByUserName(String userName) {

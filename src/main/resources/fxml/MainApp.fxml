@@ -124,8 +124,6 @@
         GridPane.rowIndex="2"
         onAction="#handleAddUserButton"/>
 
-    <stylesheets>
-        <URL value="@Main.css"/>
-    </stylesheets>
+    
 
 </GridPane>

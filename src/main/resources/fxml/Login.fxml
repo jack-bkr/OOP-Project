@@ -61,9 +61,7 @@
         />
     </HBox>
 
-    <stylesheets>
-        <URL value="@Main.css" />
-    </stylesheets>
+    
 </GridPane> 
 
 

@@ -2,10 +2,18 @@ package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import mechanicStock.classes.Product;
 import mechanicStock.classes.Vehicle;
+import mechanicStock.controllers.InfoController;
 
 public class Stock {
+    // Attributes; getters and setters
+
     private int stockID;
     public void setStockID(int ID) { this.stockID = ID; } public int getStockID() { return stockID; }
 
@@ -27,6 +35,7 @@ public class Stock {
     public Product product;
     public Vehicle vehicle;
 
+    // Constructor
     public Stock(int ID, int pID, int vID, int Quantity, int BuyPrice, int SellPrice) {
         this.stockID = ID;
         this.productID = pID;
@@ -36,6 +45,25 @@ public class Stock {
         this.sellPrice = SellPrice;
         this.product = Product.getProductByID(pID);
         this.vehicle = Vehicle.getVehicleByID(vID);
+    }
+
+    public void loadInfo() {
+        try {
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
+            Parent root = loader.load();
+
+            InfoController controller = loader.getController();
+            controller.recieveStock(this);
+
+            Scene changeScene = new Scene(root, 400, 600);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Item Info");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Stock getStockByID(int ID) {

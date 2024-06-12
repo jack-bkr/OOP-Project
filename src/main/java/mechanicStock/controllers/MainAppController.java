@@ -23,13 +23,13 @@ public class MainAppController {
     
     public void initialize() {
         populateTable(table);
-
+        
         table.setRowFactory(tv -> {
             TableRow<Item> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    Item rowData = row.getItem();
-                    System.out.println("Double click on: "+rowData);
+                    Item item = row.getItem();
+                    item.loadInfo();
                 }
             });
             return row;
@@ -67,10 +67,11 @@ public class MainAppController {
         TableColumn<Item, Integer> sellPriceColumn = new TableColumn<>("Sell Price");
         sellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
 
-        table.getColumns().addAll(stockIDColumn, vehicleNameColumn, productNameColumn, productDescColumn, quantityColumn, buyPriceColumn, sellPriceColumn);
-        
+        table.getColumns().addAll(stockIDColumn, vehicleNameColumn, productNameColumn, productDescColumn,
+                quantityColumn, buyPriceColumn, sellPriceColumn);
+
         ObservableList<Item> data = FXCollections.observableArrayList();
-        
+
         for (Item item : items) {
             data.add(item);
         }
