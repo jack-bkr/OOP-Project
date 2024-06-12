@@ -50,7 +50,7 @@ public class Product {
     }
 
     public Image getImage(int width, int height) {
-        return new Image("/img/product/" + this.productID + ".png", 0, 100, true, false);
+        return new Image("/img/product/" + this.productID + ".png", width, height, true, false);
     }
 
     public static Product getProductByID(int ID) {

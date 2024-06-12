@@ -13,13 +13,13 @@ import mechanicStock.controllers.InfoController;
 public class Vehicle {
     // Attributes; getters and setters
 
-    int vehicleID;
+    private int vehicleID;
     public void setVehicleID(int ID) { this.vehicleID = ID; } public int getVehicleID() { return vehicleID; }
 
-    String vehicleMake;
+    private String vehicleMake;
     public void setVehicleMake(String Make) { this.vehicleMake = Make; } public String getVehicleMake() { return vehicleMake; }
 
-    String vehicleModel;
+    private String vehicleModel;
     public void setVehicleModel(String Model) { this.vehicleModel = Model; } public String getVehicleModel() { return vehicleModel; }
 
     // Constructor
@@ -49,7 +49,7 @@ public class Vehicle {
     }
 
     public Image getImage(int width, int height) {
-        return new Image("/img/vehicle/" + this.vehicleID + ".png", 0, 100, true, false);
+        return new Image("/img/vehicle/" + this.vehicleID + ".png", width, height, true, false);
     }
 
     public static Vehicle getVehicleByID(int ID) {

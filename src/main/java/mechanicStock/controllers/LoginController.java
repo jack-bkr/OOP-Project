@@ -45,6 +45,10 @@ public class LoginController {
         stage.setTitle("Mechanic Stock Management System");
         stage.show();
     }
+
+    @FXML
+    protected void handleRegisterButtonAction(ActionEvent event) throws Exception {
+    }
     
     public static User getUser(String userName) {
         return User.getUserByUserName(userName);
