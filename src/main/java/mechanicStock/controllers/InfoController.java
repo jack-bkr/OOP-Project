@@ -11,80 +11,49 @@ public class InfoController {
     private Stock stock;
 
     // FXML Attributes
-    @FXML
-    private Label idValueLabel;
+    @FXML private Label idValueLabel;
 
     // Images
-    @FXML
-    private Label imageLabel;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Label secondaryImageLabel;
-    @FXML
-    private ImageView secondaryImageView;
+    @FXML private Label imageLabel;
+    @FXML private ImageView imageView;
+    @FXML private Label secondaryImageLabel;
+    @FXML private ImageView secondaryImageView;
     
     // Buttons
-    @FXML
-    private Button productInfoButton;
-    @FXML
-    private Button vehicleInfoButton;
+    @FXML private Button productInfoButton;
+    @FXML private Button vehicleInfoButton;
 
     // Stock
-    @FXML
-    private Label productIDLabel;
-    @FXML
-    private Label productIDValueLabel;
-    @FXML
-    private Label vehicleIDLabel;
-    @FXML
-    private Label vehicleIDValueLabel;
-    @FXML
-    private Label quantityLabel;
-    @FXML
-    private Label quantityValueLabel;
-    @FXML
-    private Label buyPriceLabel;
-    @FXML
-    private Label buyPriceValueLabel;
-    @FXML
-    private Label sellPriceLabel;
-    @FXML
-    private Label sellPriceValueLabel;
+    @FXML private Label productIDLabel;
+    @FXML private Label productIDValueLabel;
+    @FXML private Label vehicleIDLabel;
+    @FXML private Label vehicleIDValueLabel;
+    @FXML private Label quantityLabel;
+    @FXML private Label quantityValueLabel;
+    @FXML private Label buyPriceLabel;
+    @FXML private Label buyPriceValueLabel;
+    @FXML private Label sellPriceLabel;
+    @FXML private Label sellPriceValueLabel;
 
     // Product
-    @FXML
-    private Label productNameLabel;
-    @FXML
-    private Label productNameValueLabel;
-    @FXML
-    private Label productDescriptionLabel;
-    @FXML
-    private Label productDescriptionValueLabel;
+    @FXML private Label productNameLabel;
+    @FXML private Label productNameValueLabel;
+    @FXML private Label productDescriptionLabel;
+    @FXML private Label productDescriptionValueLabel;
 
     // Vehicle
-    @FXML
-    private Label vehicleMakeLabel;
-    @FXML
-    private Label vehicleMakeValueLabel;
-    @FXML
-    private Label vehicleModelLabel;
-    @FXML
-    private Label vehicleModelValueLabel;
+    @FXML private Label vehicleMakeLabel;
+    @FXML private Label vehicleMakeValueLabel;
+    @FXML private Label vehicleModelLabel;
+    @FXML private Label vehicleModelValueLabel;
     
     // User
-    @FXML
-    private Label userNameLabel;
-    @FXML
-    private Label userNameValueLabel;
-    @FXML
-    private Label isAdminLabel;
-    @FXML
-    private Label isAdminValueLabel;
-    @FXML
-    private Label dateRegisteredLabel;
-    @FXML
-    private Label dateRegisteredValueLabel;
+    @FXML private Label userNameLabel;
+    @FXML private Label userNameValueLabel;
+    @FXML private Label isAdminLabel;
+    @FXML private Label isAdminValueLabel;
+    @FXML private Label dateRegisteredLabel;
+    @FXML private Label dateRegisteredValueLabel;
     
     
     public void recieveStock(Stock stock) {

@@ -13,10 +13,8 @@ import mechanicStock.classes.*;
 import java.util.ArrayList;
 
 public class ViewController {
-    @FXML
-    Label welcomeLabel;
-    @FXML
-    TableView table;
+    @FXML Label welcomeLabel;
+    @FXML TableView table;
 
     User user;
     boolean isAdmin;

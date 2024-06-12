@@ -21,5 +21,192 @@
 
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
+    <Label fx:id="titleLabel"
+        id="title"
+        text=""
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="0"
+        GridPane.columnSpan="2"
+        styleClass="title"
+    />
+
+    <!-- User -->
+
+    <Label fx:id="usernameLabel"
+        text="Username: "
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"
+    />
+
+    <TextField fx:id="usernameTextField"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"
+    />
+
+    <Label fx:id="passwordLabel"
+        text="Password: "
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"
+    />
+
+    <PasswordField fx:id="passwordTextField"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"
+    />
+
+    <Label fx:id="confirmPasswordLabel"
+        text="Confirm Password: "
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        visible="false"
+    />
+
+    <PasswordField fx:id="confirmPasswordTextField"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="3"
+        visible="false"
+    />
+
+    <!-- Stock -->
+    <Label fx:id="vehicleLabel"
+        id="vehicleLabel"
+        text="Vehicle:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <ComboBox fx:id="vehicleComboBox"
+        id="vehicleCombobox"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="productLabel"
+        id="productLabel"
+        text="Vehicle:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <ComboBox fx:id="productComboBox"
+        id="productCombobox"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <Label fx:id="buyPriceLabel"
+        id="buyPriceLabel"
+        text="Buy Price:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="3"
+        visible="false"/>
     
+    <TextField fx:id="buyPriceTextField"
+        id="buyPriceValueLabel"
+        onKeyTyped="#numericOnly"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="3"
+        visible="false"/>
+    
+    <Label fx:id="sellPriceLabel"
+        id="sellPriceLabel"
+        text="Sell Price:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="4"
+        visible="false"/>
+
+    <TextField fx:id="sellPriceTextField"
+        id="sellPriceTextField"
+        onKeyTyped="#numericOnly"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="4"
+        visible="false"/>
+
+    <!-- Product Info -->
+    <Label fx:id="productNameLabel"
+        id="productNameLabel"
+        text="Product Name:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <TextField fx:id="productNameTextField"
+        id="productNameTextField"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="productDescriptionLabel"
+        id="productDescriptionLabel"
+        text="Product Description:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <TextField fx:id="productDescriptionTextField"
+        id="productDescriptionValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <!-- Vehicle Info -->
+    <Label fx:id="vehicleMakeLabel"
+        id="vehicleMakeLabel"
+        text="Vehicle Make:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <TextField fx:id="vehicleMakeTextField"
+        id="vehicleMakeValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        visible="false"/>
+
+    <Label fx:id="vehicleModelLabel"
+        id="vehicleModelLabel"
+        text="Vehicle Model:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <TextField fx:id="vehicleModelTextField"
+        id="vehicleModelTextField"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="2"
+        visible="false"/>
+
+    <!-- Image Select for Vehicles and Products -->
+
+    <Label fx:id="imageSelectLabel"
+        id="imageSelectLabel"
+        text="Select Image:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="5"
+        visible="false"/>
+
+    <Button fx:id="imageSelectButton"
+        text="Select Image"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="5"
+        visible="false"
+        onAction="#selectImage"/>
+    
+    <Label fx:id="imageNameLabel"
+        id="imageNameLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="6"
+        visible="false"/>
+
+    <Button fx:id="addButton"
+        text="Add"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="7"
+        onAction="#add"
+    />
+
 </GridPane>

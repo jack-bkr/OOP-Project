@@ -21,7 +21,7 @@
 
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
-    <Text id="welcome-text"
+    <Text id="title"
           text="Welcome"
           GridPane.columnIndex="0"
           GridPane.rowIndex="0"

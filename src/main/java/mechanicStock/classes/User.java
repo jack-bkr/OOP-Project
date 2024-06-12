@@ -195,4 +195,7 @@ public class User {
         }
         return users;
     }
+
+    public static void registerUser() {
+    }
 }

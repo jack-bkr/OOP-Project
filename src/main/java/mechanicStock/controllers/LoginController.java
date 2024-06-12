@@ -9,8 +9,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import mechanicStock.classes.User;
 
-import java.sql.*;
-
 public class LoginController {
     @FXML
     private Button loginButton;
@@ -48,6 +46,22 @@ public class LoginController {
 
     @FXML
     protected void handleRegisterButtonAction(ActionEvent event) throws Exception {
+        try { 
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
+            Parent root = loader.load();
+
+            AddController controller = loader.getController();
+            controller.recieveTable("Users");
+
+            Scene changeScene = new Scene(root, 325, 400);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Register");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public static User getUser(String userName) {

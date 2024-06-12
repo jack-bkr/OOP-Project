@@ -39,7 +39,7 @@
     </rowConstraints>
 
     <Label fx:id="welcomeLabel"
-        id="welcome-text"
+        id="title"
         text="Welcome"
         GridPane.columnIndex="0"
         GridPane.rowIndex="0"

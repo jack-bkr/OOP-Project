@@ -173,7 +173,7 @@ public class MainAppController {
             Parent root = loader.load();
 
             AddController controller = loader.getController();
-            controller.recieveTable("user");
+            controller.recieveTable("Stock");
 
             Scene changeScene = new Scene(root, 400, 600);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
