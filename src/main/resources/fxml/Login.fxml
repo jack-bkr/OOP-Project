@@ -55,6 +55,10 @@
         GridPane.columnIndex="1"
         GridPane.rowIndex="4"
     >
+        <Button fx:id="registerButton" 
+            text="Register" 
+            onAction="#handleRegisterButtonAction"
+        />
         <Button fx:id="loginButton" 
             text="Login" 
             onAction="#handleLoginButtonAction"
