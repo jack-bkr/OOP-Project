@@ -45,7 +45,7 @@
         GridPane.rowIndex="2"
     />
 
-    <TextField fx:id="passwordTextField"
+    <PasswordField fx:id="passwordTextField"
         GridPane.columnIndex="1"
         GridPane.rowIndex="2"
     />

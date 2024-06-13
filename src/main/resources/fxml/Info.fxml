@@ -236,5 +236,11 @@
         visible="false"
         onAction="#handleProductInfoButton"/>
 
+    <Button fx:id="DeleteButton"
+        text="Delete"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="9"
+        onAction="#handleDeleteButton"/>
+
     
 </GridPane>

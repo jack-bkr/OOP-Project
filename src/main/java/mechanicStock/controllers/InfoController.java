@@ -3,12 +3,17 @@ package mechanicStock.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.*;
 import mechanicStock.classes.*;
 
 public class InfoController {
     // Attributes
+    private String table;
     private Stock stock;
+    private Product product;
+    private Vehicle vehicle;
+    private User user;
 
     // FXML Attributes
     @FXML private Label idValueLabel;
@@ -57,6 +62,7 @@ public class InfoController {
     
     
     public void recieveStock(Stock stock) {
+        this.table = "Stock";
         this.stock = stock;
 
         // Set Product and Vehicle Info Buttons visible
@@ -100,6 +106,9 @@ public class InfoController {
     }
 
     public void recieveProduct(Product product) {
+        this.table = "Product";
+        this.product = product;
+
         // Set Images Visible
         imageLabel.setVisible(true);
         imageView.setVisible(true);
@@ -122,6 +131,9 @@ public class InfoController {
     }
 
     public void recieveVehicle(Vehicle vehicle) {
+        this.table = "Vehicle";
+        this.vehicle = vehicle;
+
         // Set Images Visible
         imageLabel.setVisible(true);
         imageView.setVisible(true);
@@ -145,6 +157,9 @@ public class InfoController {
     }
 
     public void recieveUser(User user) {
+        this.table = "User";
+        this.user = user;
+
         // Set User Label Visible
         userNameLabel.setVisible(true);
         isAdminLabel.setVisible(true);
@@ -170,5 +185,43 @@ public class InfoController {
     @FXML
     protected void handleVehicleInfoButton(ActionEvent event) {
         stock.vehicle.loadInfo();
+    }
+
+    @FXML
+    protected void handleDeleteButton(ActionEvent event) {
+        String itemName = "";
+
+        if (table == "Stock") {
+            itemName = "Stock ID " + idValueLabel.getText();
+        } else if (table == "Product") {
+            itemName = productNameValueLabel.getText();
+        } else if (table == "Vehicle") {
+            itemName = vehicleMakeValueLabel.getText() + " " + vehicleModelValueLabel.getText();
+        } else if (table == "User") {
+            itemName = userNameValueLabel.getText();
+        }
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Delete");
+        alert.setHeaderText("Confirm Deletion");
+        alert.setContentText("Are you sure you want to delete " + itemName + "?");
+        alert.showAndWait();
+        
+        if (alert.getResult() == ButtonType.OK) {
+            if (table == "Stock") {
+                //stock.deleteStock();
+                System.out.println("Stock Deleted");
+            } else if (table == "Product") {
+                //product.deleteProduct();
+                System.out.println("Product Deleted");
+            } else if (table == "Vehicle") {
+                //vehicle.deleteVehicle();
+                System.out.println("Vehicle Deleted");
+            } else if (table == "User") {
+                //user.deleteUser();
+                System.out.println("User Deleted");
+            }
+        }
+
     }
 }

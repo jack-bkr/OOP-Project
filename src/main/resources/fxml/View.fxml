@@ -85,12 +85,4 @@
         GridPane.rowIndex="2"
         onAction="#handleAddButton"/>
     
-    <Button fx:id="DeleteButton"
-        id="mainWindowButton"
-        text="Delete"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
-        onAction="#handleDeleteButton"/>
-
-    
 </GridPane>

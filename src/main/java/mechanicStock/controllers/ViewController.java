@@ -51,7 +51,6 @@ public class ViewController {
     }
 
     public void loadTable() {
-        table.getItems().clear();
         table.getColumns().clear();
 
         if (tableType.equals("Vehicles")) {
@@ -276,9 +275,5 @@ public class ViewController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    protected void handleDeleteButton(ActionEvent event) {
     }
 }

@@ -50,7 +50,8 @@ public class MainAppController {
                 {
                     if (onShown)
                     {
-                    populateTable(table);
+                        table.getColumns().clear();
+                        populateTable(table);
                     }
                 }
             });
@@ -98,10 +99,6 @@ public class MainAppController {
     
     @SuppressWarnings("unchecked")
     public static ObservableList populateTable(TableView<Item> table) {
-
-        table.getItems().clear();
-        table.getColumns().clear();
-
         ArrayList<Item> items = Item.getAllItems();
 
         TableColumn<Item, Integer> stockIDColumn = new TableColumn<>("stockID");
