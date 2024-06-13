@@ -97,7 +97,7 @@ public class Vehicle {
         Connection conn = null;
         Statement stmt = null;
         ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-        
+
         try {
             System.out.println("Loading JDBC driver...");
             Class.forName("org.sqlite.JDBC");
@@ -134,6 +134,52 @@ public class Vehicle {
         }
 
         return vehicles;
-        
+
+    }
+    
+    public static int addVehicle(String make, String model) {
+        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String query = "INSERT INTO Vehicles (vehicleMake, vehicleModel) VALUES ('" + make + "', '" + model + "');";
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        int vehicleID = -1;
+
+        try {
+            System.out.println("Loading JDBC driver...");
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("JDBC driver loaded.");
+
+            conn = DriverManager.getConnection(dbURL);
+            stmt = conn.createStatement();
+
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+            rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                vehicleID = rs.getInt(1);
+                System.out.println("Vehicle ID: " + vehicleID);
+            }
+
+            stmt.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Closing the connection.");
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                conn = null;
+            }
+        }
+
+        return vehicleID;
     }
 }

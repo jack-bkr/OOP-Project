@@ -159,16 +159,103 @@ public class AddController {
         }
     }
 
+    public void addStock() {
+        Vehicle vehicle = vehicleComboBox.getValue();
+        Product product = productComboBox.getValue();
+        int buyPrice = Integer.parseInt(buyPriceTextField.getText());
+        int sellPrice = Integer.parseInt(sellPriceTextField.getText());
+
+        if (vehicle == null || product == null || buyPrice == 0 || sellPrice == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled out");
+            alert.showAndWait();
+            return;
+        }
+
+        if (Stock.addStock(vehicle.getVehicleID(), product.getProductID(), 0, buyPrice, sellPrice)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Stock added successfully");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Stock could not be added");
+            alert.showAndWait();
+        }
+    }
+
+    public void addVehicle() {
+        String make = vehicleMakeTextField.getText();
+        String model = vehicleModelTextField.getText();
+        int vehicleID;
+
+        if (make.isEmpty() || model.isEmpty() || this.imageFile == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled out");
+            alert.showAndWait();
+            return;
+        }
+
+        vehicleID = Vehicle.addVehicle(make, model);
+
+        if (vehicleID > 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Vehicle added successfully");
+            alert.showAndWait();
+
+            this.imageFile.renameTo(new File("images/vehicles/" + vehicleID + ".png"));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Vehicle could not be added");
+            alert.showAndWait();
+        }
+    }
+
+    public void addProduct() {
+        String name = productNameTextField.getText();
+        String description = productDescriptionTextField.getText();
+        int productID;
+
+        if (name.isEmpty() || description.isEmpty() || this.imageFile == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled out");
+            alert.showAndWait();
+            return;
+        }
+
+        productID = Product.addProduct(name, description);
+
+        if (productID > 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Product added successfully");
+            alert.showAndWait();
+
+            this.imageFile.renameTo(new File("images/products/" + productID + ".png"));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Product could not be added");
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     protected void add(ActionEvent event) {
         if (this.table == "Users") {
             addUser();
         } else if (this.table == "Stock") {
-            // Set up fields for adding a stock item
+            addStock();
         } else if (this.table == "Vehicles") {
-            // Set up fields for adding a vehicle
+            addVehicle();
         } else if (this.table == "Products") {
-            // Set up fields for adding a product
+            //addProduct();
         } else {
             throw new IllegalArgumentException("Invalid table name");
         }

@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class User {
+    String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+
     // Attributes; getters
 
     private int userID; public int getUserID() { return userID; }

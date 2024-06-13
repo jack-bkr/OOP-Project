@@ -108,7 +108,7 @@ public class Stock {
         Connection conn = null;
         Statement stmt = null;
         ArrayList<Stock> stocks = new ArrayList<Stock>();
-        
+
         try {
             System.out.println("Loading JDBC driver...");
             Class.forName("org.sqlite.JDBC");
@@ -145,5 +145,43 @@ public class Stock {
         }
 
         return stocks;
+    }
+    
+    public static boolean addStock(int vID, int pID, int quantity, int buyPrice, int sellPrice) {
+        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String query = "INSERT INTO Stock (productID, vehicleID, stockQuantity, buyPrice, sellPrice) VALUES (" + pID + ", " + vID + ", " + quantity + ", " + buyPrice + ", " + sellPrice + ");";
+        Connection conn = null;
+        Statement stmt = null;
+        boolean success = false;
+
+        try {
+            System.out.println("Loading JDBC driver...");
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("JDBC driver loaded.");
+
+            conn = DriverManager.getConnection(dbURL);
+            stmt = conn.createStatement();
+
+            stmt.executeUpdate(query);
+
+            stmt.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Closing the connection.");
+            if (conn != null) {
+                try {
+                    conn.close();
+                    success = true;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return success;
+        
     }
 }

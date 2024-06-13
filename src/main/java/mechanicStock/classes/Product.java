@@ -94,7 +94,7 @@ public class Product {
         Connection conn = null;
         Statement stmt = null;
         ArrayList<Product> products = new ArrayList<Product>();
-        
+
         try {
             System.out.println("Loading JDBC driver...");
             Class.forName("org.sqlite.JDBC");
@@ -128,5 +128,45 @@ public class Product {
         }
 
         return products;
+    }
+    
+    public static int addProduct(String name, String description) {
+        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String query = "INSERT INTO Products (productName, productDescription) VALUES ('" + name + "', '" + description + "');";
+        Connection conn = null;
+        Statement stmt = null;
+        int productID = -1;
+
+        try {
+            System.out.println("Loading JDBC driver...");
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("JDBC driver loaded.");
+
+            conn = DriverManager.getConnection(dbURL);
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                productID = rs.getInt(1);
+            }
+
+            stmt.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Closing the connection.");
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return productID;
     }
 }
