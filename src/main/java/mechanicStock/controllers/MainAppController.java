@@ -2,6 +2,7 @@ package mechanicStock.controllers;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import mechanicStock.classes.*;
 
 public class MainAppController {
-    @FXML 
+    @FXML
     Label welcomeLabel;
     @FXML TableView<Item> table;
 
@@ -36,17 +37,35 @@ public class MainAppController {
             });
             return row;
         });
+        Platform.runLater(() -> {
+            welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+                {
+                    if (onShown)
+                    {
+                    populateTable(table);
+                    }
+                }
+            });
+        });
     }
     
     public void recieveUser(User User) {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
+
     }
 
     
     @SuppressWarnings("unchecked")
     public static void populateTable(TableView<Item> table) {
+
+        table.getItems().clear();
+        table.getColumns().clear();
+
         ArrayList<Item> items = Item.getAllItems();
 
         TableColumn<Item, Integer> stockIDColumn = new TableColumn<>("stockID");

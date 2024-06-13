@@ -2,6 +2,9 @@ package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
+
 import java.io.*;
 
 import javafx.fxml.FXMLLoader;
@@ -57,6 +60,12 @@ public class Product {
 
         return null;
     }
+
+    @Override
+    public String toString() {
+        return this.productName;
+    }
+
 
     public static Product getProductByID(int ID) {
         String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";

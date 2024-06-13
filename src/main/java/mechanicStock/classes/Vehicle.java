@@ -56,7 +56,12 @@ public class Vehicle {
         }
 
         return null;
-        
+
+    }
+    
+    @Override
+    public String toString() {
+        return this.vehicleMake + " " + this.vehicleModel;
     }
 
     public static Vehicle getVehicleByID(int ID) {

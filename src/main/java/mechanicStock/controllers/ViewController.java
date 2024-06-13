@@ -31,16 +31,16 @@ public class ViewController {
         loadTable();
 
         welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
             {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+                if (onShown)
                 {
-                    if (onShown)
-                    {
-                        loadTable();
-                    }
+                    loadTable();
                 }
-            });
+            }
+        });
     }
 
     public void loadTable() {

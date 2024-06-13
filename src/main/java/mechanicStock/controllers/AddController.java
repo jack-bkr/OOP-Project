@@ -1,5 +1,7 @@
 package mechanicStock.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -97,6 +99,8 @@ public class AddController {
         buyPriceTextField.setVisible(true);
         sellPriceLabel.setVisible(true);
         sellPriceTextField.setVisible(true);
+
+        populateComboBoxes();
     }
 
     public void showVehicle() {
@@ -127,6 +131,22 @@ public class AddController {
         imageSelectLabel.setVisible(true);
         imageSelectButton.setVisible(true);
         imageNameLabel.setVisible(true);
+    }
+
+    public void populateComboBoxes() {
+        ObservableList<Vehicle> vehicles = FXCollections.observableArrayList();
+        ObservableList<Product> products = FXCollections.observableArrayList();
+
+        for (Vehicle vehicle : Vehicle.getAllVehicles()) {
+            vehicles.add(vehicle);
+        }
+
+        for (Product product : Product.getAllProducts()) {
+            products.add(product);
+        }
+
+        vehicleComboBox.setItems(vehicles);
+        productComboBox.setItems(products);
     }
 
     public void addUser() {
