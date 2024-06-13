@@ -7,6 +7,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +21,16 @@ import mechanicStock.classes.*;
 public class MainAppController {
     @FXML
     Label welcomeLabel;
-    @FXML TableView<Item> table;
+    @FXML
+    TableView<Item> table;
+    @FXML
+    TextField searchField;
 
     User user;
     boolean isAdmin;
     
     public void initialize() {
-        populateTable(table);
+        ObservableList<Item> data = populateTable(table);
         
         table.setRowFactory(tv -> {
             TableRow<Item> row = new TableRow<>();
@@ -50,6 +55,38 @@ public class MainAppController {
                 }
             });
         });
+
+        FilteredList<Item> filteredData = new FilteredList<Item>(data, b -> true);
+		
+		// Set the filter Predicate whenever the filter changes.
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(item -> {
+				// If filter text is empty, display all persons.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare first name and last name of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (item.getVehicleName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true; // Filter matches first name.
+				} else if (item.getProductName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches last name.
+				} else return false; // Does not match.
+			});
+		});
+		
+		// Wrap the FilteredList in a SortedList. 
+		SortedList<Item> sortedData = new SortedList<>(filteredData);
+		
+		// Bind the SortedList comparator to the TableView comparator.
+		// Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		
+		// Add sorted (and filtered) data to the table.
+		table.setItems(sortedData);
     }
     
     public void recieveUser(User User) {
@@ -60,7 +97,7 @@ public class MainAppController {
 
     
     @SuppressWarnings("unchecked")
-    public static void populateTable(TableView<Item> table) {
+    public static ObservableList populateTable(TableView<Item> table) {
 
         table.getItems().clear();
         table.getColumns().clear();
@@ -98,11 +135,13 @@ public class MainAppController {
         }
 
         table.setItems(data);
+
+        return data;
     }
     
     @FXML 
     protected void handleLogoutButton(ActionEvent event) {
-        try { 
+        try {
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Login.fxml"));
             Parent root = loader.load();

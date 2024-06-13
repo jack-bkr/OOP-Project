@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?> 
 <?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
 
 <GridPane xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"

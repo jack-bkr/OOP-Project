@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class ViewController {
     @FXML Label welcomeLabel;
     @FXML TableView table;
+    @FXML TextField searchField;
 
     User user;
     boolean isAdmin;
@@ -91,6 +94,38 @@ public class ViewController {
             });
             return row;
         });
+
+        FilteredList<Vehicle> filteredData = new FilteredList<Vehicle>(data, b -> true);
+		
+		// Set the filter Predicate whenever the filter changes.
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(vehicle -> {
+				// If filter text is empty, display all vehicles.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare make and model of every vehicle with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (vehicle.getVehicleMake().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true; // Filter matches make.
+				} else if (vehicle.getVehicleModel().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches model.
+				} else return false; // Does not match.
+			});
+		});
+		
+		// Wrap the FilteredList in a SortedList. 
+		SortedList<Vehicle> sortedData = new SortedList<Vehicle>(filteredData);
+		
+		// Bind the SortedList comparator to the TableView comparator.
+		// Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		
+		// Add sorted (and filtered) data to the table.
+		table.setItems(sortedData);
     }
 
     @SuppressWarnings("unchecked")
@@ -124,6 +159,38 @@ public class ViewController {
             });
             return row;
         });
+
+        FilteredList<Product> filteredData = new FilteredList<Product>(data, b -> true);
+		
+		// Set the filter Predicate whenever the filter changes.
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all products.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare name and description of every product with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (product.getProductName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true; // Filter matches name.
+				} else if (product.getProductDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches description.
+				} else return false; // Does not match.
+			});
+		});
+		
+		// Wrap the FilteredList in a SortedList. 
+		SortedList<Product> sortedData = new SortedList<Product>(filteredData);
+		
+		// Bind the SortedList comparator to the TableView comparator.
+		// Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		
+		// Add sorted (and filtered) data to the table.
+		table.setItems(sortedData);
     }
 
     @SuppressWarnings("unchecked")
@@ -160,6 +227,36 @@ public class ViewController {
             });
             return row;
         });
+
+        FilteredList<User> filteredData = new FilteredList<User>(data, b -> true);
+		
+		// Set the filter Predicate whenever the filter changes.
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(user -> {
+				// If filter text is empty, display all persons.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare username of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (user.getUserName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true; // Filter matches username.
+				} else return false; // Does not match.
+			});
+		});
+		
+		// Wrap the FilteredList in a SortedList. 
+		SortedList<User> sortedData = new SortedList<User>(filteredData);
+		
+		// Bind the SortedList comparator to the TableView comparator.
+		// Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		
+		// Add sorted (and filtered) data to the table.
+		table.setItems(sortedData);
     }
 
     @FXML 
