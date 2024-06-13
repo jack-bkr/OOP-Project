@@ -1,5 +1,6 @@
 package mechanicStock.controllers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
@@ -30,16 +31,19 @@ public class ViewController {
         tableType = table;
         loadTable();
 
-        welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+        Platform.runLater(() -> {
+            
+            welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
             {
-                if (onShown)
+                @Override
+                public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
                 {
-                    loadTable();
+                    if (onShown)
+                    {
+                        loadTable();
+                    }
                 }
-            }
+            });
         });
     }
 
@@ -169,25 +173,6 @@ public class ViewController {
             controller.recieveTable(this.tableType);
 
             Scene changeScene = new Scene(root, 325, 400);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
-            stage.setScene(changeScene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void handleEditButton(ActionEvent event) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Edit.fxml"));
-            Parent root = loader.load();
-
-            EditController controller = loader.getController();
-            controller.recieveTable(this.tableType, this.selectedID);
-
-            Scene changeScene = new Scene(root, 400, 600);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.show();

@@ -113,17 +113,8 @@
     <Button fx:id="AddStockButton"
         id="mainWindowButton"
         text="Add Stock"
-        GridPane.columnIndex="6"
-        GridPane.rowIndex="2"
-        onAction="#handleAddStockButton"/>
-    
-    <Button fx:id="AddUserButton"
-        id="mainWindowButton"
-        text="Add User"
         GridPane.columnIndex="7"
         GridPane.rowIndex="2"
-        onAction="#handleAddUserButton"/>
-
-    
+        onAction="#handleAddStockButton"/>    
 
 </GridPane>

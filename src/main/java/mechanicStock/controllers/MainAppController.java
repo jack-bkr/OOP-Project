@@ -56,7 +56,6 @@ public class MainAppController {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
-
     }
 
     
@@ -197,26 +196,6 @@ public class MainAppController {
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Add Stock");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    @FXML
-    protected void handleAddUserButton(ActionEvent event) {
-        try { 
-            Stage stage = (new Stage());
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
-            Parent root = loader.load();
-
-            AddController controller = loader.getController();
-            controller.recieveTable("user");
-
-            Scene changeScene = new Scene(root, 400, 600);
-            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
-            stage.setScene(changeScene);
-            stage.setTitle("Add User");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
