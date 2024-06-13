@@ -2,6 +2,8 @@ package mechanicStock.controllers;
 
 import java.util.ArrayList;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -105,8 +107,7 @@ public class MainAppController {
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user);
-            controller.recieveProducts(Product.getAllProducts());
+            controller.recieveSender(user, "Products");
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
@@ -126,8 +127,7 @@ public class MainAppController {
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user);
-            controller.recieveVehicles(Vehicle.getAllVehicles());
+            controller.recieveSender(user, "Vehicles");
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
@@ -147,8 +147,7 @@ public class MainAppController {
             Parent root = loader.load();
 
             ViewController controller = loader.getController();
-            controller.recieveSender(user);
-            controller.recieveUsers(User.getAllUsers());
+            controller.recieveSender(user, "Users");
 
             Scene changeScene = new Scene(root, 900, 500);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());

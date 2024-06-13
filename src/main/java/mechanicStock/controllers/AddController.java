@@ -8,11 +8,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import java.io.File;
+import java.nio.file.*;
+import java.io.IOException;
+
 
 import mechanicStock.classes.*;
 
 public class AddController {
     // Attributes
+    private static String path = Product.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     File imageFile;
     String table;
 
@@ -207,7 +211,14 @@ public class AddController {
             alert.setHeaderText("Vehicle added successfully");
             alert.showAndWait();
 
-            this.imageFile.renameTo(new File("images/vehicles/" + vehicleID + ".png"));
+            Path dest = Paths.get(path.substring(1, path.length()), "img", "vehicle", vehicleID + ".png");
+            System.out.println(dest);
+        
+            try {
+                Files.copy(this.imageFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -237,7 +248,15 @@ public class AddController {
             alert.setHeaderText("Product added successfully");
             alert.showAndWait();
 
-            this.imageFile.renameTo(new File("images/products/" + productID + ".png"));
+            Path dest = Paths.get(path.substring(1, path.length()), "img", "product", productID + ".png");
+            System.out.println(dest);
+
+            try {
+                Files.copy(this.imageFile.toPath(), dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class User {
-    String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+    private static String path = User.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
     // Attributes; getters
 
@@ -56,7 +56,7 @@ public class User {
     }
 
     public static User getUserByUserName(String userName) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Users WHERE userName = '" + userName + "';";
         Connection conn = null;
         Statement stmt = null;
@@ -103,7 +103,7 @@ public class User {
     }
 
     public static User getUserByID(int ID) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Users WHERE userID = " + ID + ";";
         Connection conn = null;
         Statement stmt = null;
@@ -150,7 +150,7 @@ public class User {
     }
     
     public static ArrayList<User> getAllUsers() {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Users;";
         Connection conn = null;
         Statement stmt = null;
@@ -198,7 +198,7 @@ public class User {
     }
 
     public static boolean registerUser(String username, String password) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Users (userName, userPassword, isAdmin, dateRegistered, adminApproved) VALUES ('" + username + "', '" + password + "', FALSE, CURRENT_TIMESTAMP, FALSE);";
         Connection conn = null;
         Statement stmt = null;

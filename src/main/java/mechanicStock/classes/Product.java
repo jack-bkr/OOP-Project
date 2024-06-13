@@ -2,6 +2,7 @@ package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.io.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class Product {
+    private static String path = Product.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+
     // Attributes; getters
 
     private int productID; public int getProductID() { return productID; } 
@@ -44,11 +47,19 @@ public class Product {
     }
 
     public Image getImage(int width, int height) {
-        return new Image("/img/product/" + this.productID + ".png", width, height, true, false);
+        InputStream is;
+        try {
+            is = new FileInputStream(path + "img/product/" + this.productID + ".png");
+            return new Image(new BufferedInputStream(is), width, height, true, false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static Product getProductByID(int ID) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Products WHERE productID = " + ID + ";";
         Connection conn = null;
         Statement stmt = null;
@@ -89,7 +100,7 @@ public class Product {
     }
 
     public static ArrayList<Product> getAllProducts() {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Products;";
         Connection conn = null;
         Statement stmt = null;
@@ -131,7 +142,7 @@ public class Product {
     }
     
     public static int addProduct(String name, String description) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Products (productName, productDescription) VALUES ('" + name + "', '" + description + "');";
         Connection conn = null;
         Statement stmt = null;

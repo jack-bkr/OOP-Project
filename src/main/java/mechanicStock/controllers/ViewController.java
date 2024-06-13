@@ -1,5 +1,7 @@
 package mechanicStock.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,16 +23,41 @@ public class ViewController {
     int selectedID;
     String tableType;
 
-    public void recieveSender(User User) {
+    public void recieveSender(User User, String table) {
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
+        tableType = table;
+        loadTable();
+
+        welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+                {
+                    if (onShown)
+                    {
+                        loadTable();
+                    }
+                }
+            });
+    }
+
+    public void loadTable() {
+        table.getItems().clear();
+        table.getColumns().clear();
+
+        if (tableType.equals("Vehicles")) {
+            recieveVehicles(Vehicle.getAllVehicles());
+        } else if (tableType.equals("Products")) {
+            recieveProducts(Product.getAllProducts());
+        } else if (tableType.equals("Users")) {
+            recieveUsers(User.getAllUsers());
+        }
     }
 
     @SuppressWarnings("unchecked")
     public void recieveVehicles(ArrayList<Vehicle> vehicles) {
-        tableType = "Vehicles";
-        
         TableColumn<Vehicle, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleID"));
 
@@ -64,8 +91,6 @@ public class ViewController {
 
     @SuppressWarnings("unchecked")
     public void recieveProducts(ArrayList<Product> products) {
-        tableType = "Products";
-
         TableColumn<Product, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
 
@@ -99,8 +124,6 @@ public class ViewController {
 
     @SuppressWarnings("unchecked")
     public void recieveUsers(ArrayList<User> users) {
-        tableType = "Users";
-
         TableColumn<User, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
 

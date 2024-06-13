@@ -2,6 +2,7 @@ package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.io.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
 
 public class Vehicle {
+    private static String path = Vehicle.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+
     // Attributes; getters
 
     private int vehicleID; public int getVehicleID() { return vehicleID; }
@@ -44,11 +47,20 @@ public class Vehicle {
     }
 
     public Image getImage(int width, int height) {
-        return new Image("/img/vehicle/" + this.vehicleID + ".png", width, height, true, false);
+        InputStream is;
+        try {
+            is = new FileInputStream(path + "img/vehicle/" + this.vehicleID + ".png");
+            return new Image(new BufferedInputStream(is), width, height, true, false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+        
     }
 
     public static Vehicle getVehicleByID(int ID) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Vehicles WHERE vehicleID = " + ID + ";";
         Connection conn = null;
         Statement stmt = null;
@@ -92,7 +104,7 @@ public class Vehicle {
     }
 
     public static ArrayList<Vehicle> getAllVehicles() {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Vehicles;";
         Connection conn = null;
         Statement stmt = null;
@@ -138,7 +150,7 @@ public class Vehicle {
     }
     
     public static int addVehicle(String make, String model) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Vehicles (vehicleMake, vehicleModel) VALUES ('" + make + "', '" + model + "');";
         Connection conn = null;
         Statement stmt = null;
@@ -159,7 +171,6 @@ public class Vehicle {
 
             if (rs.next()) {
                 vehicleID = rs.getInt(1);
-                System.out.println("Vehicle ID: " + vehicleID);
             }
 
             stmt.close();

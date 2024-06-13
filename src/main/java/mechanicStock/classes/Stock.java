@@ -7,11 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mechanicStock.classes.Product;
-import mechanicStock.classes.Vehicle;
 import mechanicStock.controllers.InfoController;
 
 public class Stock {
+    private static String path = Stock.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+
     // Attributes; getters
 
     private int stockID; public int getStockID() { return stockID; }
@@ -58,7 +58,7 @@ public class Stock {
     }
 
     public static Stock getStockByID(int ID) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Stock WHERE stockID = " + ID + ";";
         Connection conn = null;
         Statement stmt = null;
@@ -103,7 +103,7 @@ public class Stock {
     }
     
     public static ArrayList<Stock> getAllStock() {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Stock;";
         Connection conn = null;
         Statement stmt = null;
@@ -148,7 +148,7 @@ public class Stock {
     }
     
     public static boolean addStock(int vID, int pID, int quantity, int buyPrice, int sellPrice) {
-        String dbURL = "jdbc:sqlite::resource:mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Stock (productID, vehicleID, stockQuantity, buyPrice, sellPrice) VALUES (" + pID + ", " + vID + ", " + quantity + ", " + buyPrice + ", " + sellPrice + ");";
         Connection conn = null;
         Statement stmt = null;
