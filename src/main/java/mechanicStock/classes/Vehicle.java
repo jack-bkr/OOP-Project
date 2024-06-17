@@ -64,6 +64,44 @@ public class Vehicle {
         return this.vehicleMake + " " + this.vehicleModel;
     }
 
+    public boolean deleteItem() {
+        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
+        String query = "DELETE FROM Stock WHERE vehicleID = " + this.vehicleID + ";" +
+        "DELETE FROM Vehicles WHERE vehicleID = " + this.vehicleID + ";";
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            System.out.println("Loading JDBC driver...");
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("JDBC driver loaded.");
+
+            conn = DriverManager.getConnection(dbURL);
+            stmt = conn.createStatement();
+
+            stmt.executeUpdate(query);
+
+            stmt.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Closing the connection.");
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                conn = null;
+            }
+        }
+
+        return true;
+    }
+
     public static Vehicle getVehicleByID(int ID) {
         String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Vehicles WHERE vehicleID = " + ID + ";";

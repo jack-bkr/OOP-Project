@@ -294,7 +294,7 @@ public class AddController {
         } else if (this.table == "Vehicles") {
             addVehicle();
         } else if (this.table == "Products") {
-            //addProduct();
+            addProduct();
         } else {
             throw new IllegalArgumentException("Invalid table name");
         }

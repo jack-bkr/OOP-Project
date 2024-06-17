@@ -177,6 +177,23 @@ public class InfoController {
         dateRegisteredValueLabel.setText(String.valueOf(user.getDateRegistered()));
     }
 
+    public void deleteInfo(boolean success) {
+        if (success) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Item Deleted");
+            alert.setContentText("The item has been successfully deleted.");
+            alert.showAndWait();
+            
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Item Not Deleted");
+            alert.setContentText("The item has not been deleted. Please try again.");
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     protected void handleProductInfoButton(ActionEvent event) {
         stock.product.loadInfo();
@@ -189,37 +206,33 @@ public class InfoController {
 
     @FXML
     protected void handleDeleteButton(ActionEvent event) {
-        String itemName = "";
+        String alertContext = "Are you sure you want to delete ";
 
         if (table == "Stock") {
-            itemName = "Stock ID " + idValueLabel.getText();
+            alertContext += "Stock ID: " + idValueLabel.getText();
         } else if (table == "Product") {
-            itemName = productNameValueLabel.getText();
+            alertContext += productNameValueLabel.getText() + ", it will also delete all Stock associated with this Product.";
         } else if (table == "Vehicle") {
-            itemName = vehicleMakeValueLabel.getText() + " " + vehicleModelValueLabel.getText();
+            alertContext += vehicleMakeValueLabel.getText() + " " + vehicleModelValueLabel.getText() + ", it will also delete all Stock associated with this Vehicle.";
         } else if (table == "User") {
-            itemName = userNameValueLabel.getText();
+            alertContext += userNameValueLabel.getText();
         }
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm Delete");
         alert.setHeaderText("Confirm Deletion");
-        alert.setContentText("Are you sure you want to delete " + itemName + "?");
+        alert.setContentText(alertContext);
         alert.showAndWait();
         
         if (alert.getResult() == ButtonType.OK) {
             if (table == "Stock") {
-                //stock.deleteStock();
-                System.out.println("Stock Deleted");
+                deleteInfo(stock.deleteItem());
             } else if (table == "Product") {
-                //product.deleteProduct();
-                System.out.println("Product Deleted");
+                deleteInfo(product.deleteItem());
             } else if (table == "Vehicle") {
-                //vehicle.deleteVehicle();
-                System.out.println("Vehicle Deleted");
+                deleteInfo(vehicle.deleteItem());
             } else if (table == "User") {
-                //user.deleteUser();
-                System.out.println("User Deleted");
+                deleteInfo(user.deleteItem());
             }
         }
 

@@ -87,7 +87,7 @@
 
     <Label fx:id="productLabel"
         id="productLabel"
-        text="Vehicle:"
+        text="Product:"
         GridPane.columnIndex="0"
         GridPane.rowIndex="2"
         visible="false"/>

@@ -219,28 +219,29 @@
         GridPane.columnIndex="1"
         GridPane.rowIndex="5"
         visible="false"/>
+
+    <HBox spacing="10"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="8"
+        GridPane.columnSpan="2"
+    >
     
-    <Button fx:id="vehicleInfoButton"
-        id="infoButton"
-        text="Vehicle Info"
-        GridPane.columnIndex="0"
-        GridPane.rowIndex="8"
-        visible="false"
-        onAction="#handleVehicleInfoButton"/>
+        <Button fx:id="vehicleInfoButton"
+            id="infoButton"
+            text="Vehicle Info"
+            visible="false"
+            onAction="#handleVehicleInfoButton"/>
 
-    <Button fx:id="productInfoButton"
-        id="infoButton"
-        text="Product Info"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="8"
-        visible="false"
-        onAction="#handleProductInfoButton"/>
+        <Button fx:id="productInfoButton"
+            id="infoButton"
+            text="Product Info"
+            visible="false"
+            onAction="#handleProductInfoButton"/>
 
-    <Button fx:id="DeleteButton"
-        text="Delete"
-        GridPane.columnIndex="0"
-        GridPane.rowIndex="9"
-        onAction="#handleDeleteButton"/>
+        <Button fx:id="DeleteButton"
+            text="Delete"
+            onAction="#handleDeleteButton"/>
+    </HBox>
 
     
 </GridPane>
