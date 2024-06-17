@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
+import mechanicStock.controllers.dbController;
 
 public class Vehicle {
     private static String path = Vehicle.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -65,58 +66,31 @@ public class Vehicle {
     }
 
     public boolean deleteItem() {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "DELETE FROM Stock WHERE vehicleID = " + this.vehicleID + ";" +
         "DELETE FROM Vehicles WHERE vehicleID = " + this.vehicleID + ";";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             stmt.executeUpdate(query);
-
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                conn = null;
-            }
         }
 
+        dbController.closeConnection(conn);
         return true;
     }
 
     public static Vehicle getVehicleByID(int ID) {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Vehicles WHERE vehicleID = " + ID + ";";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         Vehicle vehicle = null;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -126,41 +100,22 @@ public class Vehicle {
             }
 
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                conn = null;
-            }
         }
 
+        dbController.closeConnection(conn);
         return vehicle;
     }
 
     public static ArrayList<Vehicle> getAllVehicles() {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Vehicles;";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -171,45 +126,25 @@ public class Vehicle {
             }
 
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                conn = null;
-            }
         }
 
+        dbController.closeConnection(conn);
         return vehicles;
 
     }
     
     public static int addVehicle(String make, String model) {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Vehicles (vehicleMake, vehicleModel) VALUES ('" + make + "', '" + model + "');";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         ResultSet rs = null;
         int vehicleID = -1;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-
             rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
@@ -217,23 +152,11 @@ public class Vehicle {
             }
 
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                conn = null;
-            }
         }
 
+        dbController.closeConnection(conn);
         return vehicleID;
     }
 }

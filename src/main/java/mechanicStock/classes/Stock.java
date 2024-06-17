@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mechanicStock.controllers.InfoController;
+import mechanicStock.controllers.dbController;
 
 public class Stock {
     private static String path = Stock.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -58,57 +59,32 @@ public class Stock {
     }
 
     public boolean deleteItem() {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "DELETE FROM Stock WHERE stockID = " + this.stockID + ";";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         boolean success = false;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             stmt.executeUpdate(query);
-
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                    success = true;
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
 
+        dbController.closeConnection(conn);
         return success;
     }
 
     public static Stock getStockByID(int ID) {
         String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Stock WHERE stockID = " + ID + ";";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         Stock stock = null;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -121,39 +97,22 @@ public class Stock {
             }
 
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
 
+        dbController.closeConnection(conn);
         return stock;
     }
     
     public static ArrayList<Stock> getAllStock() {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Stock;";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         ArrayList<Stock> stocks = new ArrayList<Stock>();
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -166,59 +125,32 @@ public class Stock {
             }
 
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
 
+        dbController.closeConnection(conn);
         return stocks;
     }
     
     public static boolean addStock(int vID, int pID, int quantity, int buyPrice, int sellPrice) {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "INSERT INTO Stock (productID, vehicleID, stockQuantity, buyPrice, sellPrice) VALUES (" + pID
                 + ", " + vID + ", " + quantity + ", " + buyPrice + ", " + sellPrice + ");";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         boolean success = false;
 
         try {
-            System.out.println("Loading JDBC driver...");
-            Class.forName("org.sqlite.JDBC");
-            System.out.println("JDBC driver loaded.");
-
-            conn = DriverManager.getConnection(dbURL);
             stmt = conn.createStatement();
-
             stmt.executeUpdate(query);
-
             stmt.close();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            System.out.println("Closing the connection.");
-            if (conn != null) {
-                try {
-                    conn.close();
-                    success = true;
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            success = true;
         }
-
+        
+        dbController.closeConnection(conn);
         return success;
 
     }
