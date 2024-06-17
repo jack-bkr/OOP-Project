@@ -70,6 +70,7 @@ public class Product {
         "DELETE FROM Products WHERE productID = " + this.productID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
+        boolean success = false;
 
         try {
             stmt = conn.createStatement();
@@ -77,11 +78,13 @@ public class Product {
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            success = true;
         }
         
         dbController.closeConnection(conn);
 
-        return true;
+        return success;
     }
 
     public static Product getProductByID(int ID) {

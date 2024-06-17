@@ -70,6 +70,7 @@ public class Vehicle {
         "DELETE FROM Vehicles WHERE vehicleID = " + this.vehicleID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
+        boolean success = false;
 
         try {
             stmt = conn.createStatement();
@@ -77,10 +78,12 @@ public class Vehicle {
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            success = true;
         }
 
         dbController.closeConnection(conn);
-        return true;
+        return success;
     }
 
     public static Vehicle getVehicleByID(int ID) {

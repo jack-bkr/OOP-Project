@@ -70,6 +70,8 @@ public class Stock {
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            success = true;
         }
 
         dbController.closeConnection(conn);

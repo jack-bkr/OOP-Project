@@ -27,6 +27,8 @@ public class InfoController {
     // Buttons
     @FXML private Button productInfoButton;
     @FXML private Button vehicleInfoButton;
+    @FXML private Button approveButton;
+    @FXML private Button toggleAdminButton;
 
     // Stock
     @FXML private Label productIDLabel;
@@ -57,6 +59,8 @@ public class InfoController {
     @FXML private Label userNameValueLabel;
     @FXML private Label isAdminLabel;
     @FXML private Label isAdminValueLabel;
+    @FXML private Label isAdminApprovedLabel;
+    @FXML private Label isAdminApprovedValueLabel;
     @FXML private Label dateRegisteredLabel;
     @FXML private Label dateRegisteredValueLabel;
     
@@ -163,17 +167,25 @@ public class InfoController {
         // Set User Label Visible
         userNameLabel.setVisible(true);
         isAdminLabel.setVisible(true);
+        isAdminApprovedLabel.setVisible(true);
         dateRegisteredLabel.setVisible(true);
 
         // Set User Values Visible
         userNameValueLabel.setVisible(true);
         isAdminValueLabel.setVisible(true);
+        isAdminApprovedValueLabel.setVisible(true);
         dateRegisteredValueLabel.setVisible(true);
+
+        // Set User Buttons
+        if (!user.getAdminApproved()) { approveButton.setVisible(true); }
+        toggleAdminButton.setVisible(true);
+        if (user.getIsAdmin()) { toggleAdminButton.setText("Remove Admin"); }
 
         // Set User values
         idValueLabel.setText(String.valueOf(user.getUserID()));
         userNameValueLabel.setText(user.getUserName());
         isAdminValueLabel.setText(String.valueOf(user.getIsAdmin()));
+        isAdminApprovedValueLabel.setText(String.valueOf(user.getAdminApproved()));
         dateRegisteredValueLabel.setText(String.valueOf(user.getDateRegistered()));
     }
 
@@ -202,6 +214,47 @@ public class InfoController {
     @FXML
     protected void handleVehicleInfoButton(ActionEvent event) {
         stock.vehicle.loadInfo();
+    }
+
+    @FXML
+    protected void handleToggleAdminButton(ActionEvent event) {
+        if (user.toggleAdmin()) {
+            isAdminValueLabel.setText(String.valueOf(user.getIsAdmin()));
+            if (user.getIsAdmin()) { toggleAdminButton.setText("Remove Admin"); }
+            else { toggleAdminButton.setText("Make Admin"); }
+            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Admin Status Changed");
+            alert.setContentText("The user's admin status has been successfully changed.");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Admin Status Not Changed");
+            alert.setContentText("The user's admin status has not been changed. Please try again.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    protected void handleApproveButton(ActionEvent event) {
+        if (user.approveUser()) {
+            isAdminApprovedValueLabel.setText(String.valueOf(user.getAdminApproved()));
+            approveButton.setVisible(false);
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Approval Status Changed");
+            alert.setContentText("This user is now approved.");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Approval Not Changed");
+            alert.setContentText("The user's approval status has not been changed. Please try again.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

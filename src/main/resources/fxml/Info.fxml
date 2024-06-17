@@ -207,18 +207,33 @@
         GridPane.rowIndex="4"
         visible="false"/>
 
+    <Label fx:id="isAdminApprovedLabel"
+        id="isAdminApprovedLabel"
+        text="Admin Approval:"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="5"
+        visible="false"/>
+    
+    <Label fx:id="isAdminApprovedValueLabel"
+        id="isAdminApprovedValueLabel"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="5"
+        visible="false"/>
+
     <Label fx:id="dateRegisteredLabel"
         id="dateRegisteredLabel"
         text="Date Registered:"
         GridPane.columnIndex="0"
-        GridPane.rowIndex="5"
+        GridPane.rowIndex="6"
         visible="false"/>
     
     <Label fx:id="dateRegisteredValueLabel"
         id="dateRegisteredValueLabel"
         GridPane.columnIndex="1"
-        GridPane.rowIndex="5"
+        GridPane.rowIndex="6"
         visible="false"/>
+
+    <!-- Buttons -->
 
     <HBox spacing="10"
         GridPane.columnIndex="0"
@@ -237,11 +252,27 @@
             text="Product Info"
             visible="false"
             onAction="#handleProductInfoButton"/>
+        
 
         <Button fx:id="DeleteButton"
             text="Delete"
             onAction="#handleDeleteButton"/>
     </HBox>
 
+    <Button fx:id="approveButton"
+        id="infoButton"
+        text="Approve"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="9"
+        visible="false"
+        onAction="#handleApproveButton"/>
+
+    <Button fx:id="toggleAdminButton"
+        id="infoButton"
+        text="Make Admin"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="9"
+        visible="false"
+        onAction="#handleToggleAdminButton"/>
     
 </GridPane>

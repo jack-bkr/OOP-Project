@@ -203,10 +203,13 @@ public class ViewController {
         TableColumn<User, Boolean> adminColumn = new TableColumn<>("Admin");
         adminColumn.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
 
+        TableColumn<User, Boolean> approvedColumn = new TableColumn<>("Approved");
+        approvedColumn.setCellValueFactory(new PropertyValueFactory<>("adminApproved"));
+
         TableColumn<User, String> dateColumn = new TableColumn<>("Date Registered");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateRegistered"));
 
-        table.getColumns().addAll(idColumn, nameColumn, adminColumn, dateColumn);
+        table.getColumns().addAll(idColumn, nameColumn, adminColumn, approvedColumn, dateColumn);
 
         ObservableList<User> data = FXCollections.observableArrayList();
 

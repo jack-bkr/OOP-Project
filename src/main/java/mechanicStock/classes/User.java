@@ -68,6 +68,50 @@ public class User {
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            success = true;
+        }
+
+        dbController.closeConnection(conn);
+        return success;
+    }
+
+    public boolean toggleAdmin() {
+        String query = "UPDATE Users SET isAdmin = " + !this.isAdmin + " WHERE userID = " + this.userID + ";";
+        Connection conn = dbController.openConnection();
+        Statement stmt = null;
+        boolean success = false;
+
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            success = true;
+            this.isAdmin = !this.isAdmin;
+        }
+
+        dbController.closeConnection(conn);
+        return success;
+    }
+
+    public boolean approveUser() {
+        String query = "UPDATE Users SET adminApproved = TRUE WHERE userID = " + this.userID + ";";
+        Connection conn = dbController.openConnection();
+        Statement stmt = null;
+        boolean success = false;
+
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            success = true;
+            this.adminApproved = true;
         }
 
         dbController.closeConnection(conn);
@@ -134,7 +178,7 @@ public class User {
     
     public static ArrayList<User> getAllUsers() {
         String query = "SELECT * FROM Users;";
-        Connection conn = null;
+        Connection conn = dbController.openConnection();
         Statement stmt = null;
         ArrayList<User> users = new ArrayList<User>();
 
