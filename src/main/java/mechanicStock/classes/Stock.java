@@ -11,8 +11,6 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class Stock {
-    private static String path = Stock.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-
     // Attributes; getters
 
     private int stockID; public int getStockID() { return stockID; }
@@ -79,7 +77,6 @@ public class Stock {
     }
 
     public static Stock getStockByID(int ID) {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Stock WHERE stockID = " + ID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;

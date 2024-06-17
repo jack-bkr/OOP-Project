@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class ViewController {
     @FXML Label welcomeLabel;
+    @SuppressWarnings("rawtypes")
     @FXML TableView table;
     @FXML TextField searchField;
 

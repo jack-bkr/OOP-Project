@@ -30,6 +30,7 @@ public class MainAppController {
     boolean isAdmin;
     
     public void initialize() {
+        @SuppressWarnings("unchecked")
         ObservableList<Item> data = populateTable(table);
         
         table.setRowFactory(tv -> {
@@ -97,7 +98,7 @@ public class MainAppController {
     }
 
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static ObservableList populateTable(TableView<Item> table) {
         ArrayList<Item> items = Item.getAllItems();
 

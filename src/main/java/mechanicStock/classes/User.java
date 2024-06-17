@@ -11,7 +11,6 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class User {
-    private static String path = User.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
     // Attributes; getters
 

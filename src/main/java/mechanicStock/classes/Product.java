@@ -88,7 +88,6 @@ public class Product {
     }
 
     public static Product getProductByID(int ID) {
-        String dbURL = "jdbc:sqlite:" + path + "mechanicStockDB.sqlite";
         String query = "SELECT * FROM Products WHERE productID = " + ID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
