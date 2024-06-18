@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.nio.file.*;
 import java.io.IOException;
-import java.net.URI;
 
 import mechanicStock.classes.*;
 
 public class AddController {
     // Attributes
-    private static String path = dbController.getPath();
+    private static String[] fullpath = dbController.getPath().split(":");
+    private static String path = fullpath[fullpath.length - 1];
     File imageFile;
     String table;
 
@@ -231,10 +231,7 @@ public class AddController {
             alert.setHeaderText("Vehicle added successfully");
             alert.showAndWait();
 
-            String uri = path.split("file:/")[1].split(":")[1];
-
-            Path dest = Paths.get(uri, "img", "vehicle", vehicleID + ".png");
-            System.out.println(dest);
+            Path dest = Paths.get(path, "img", "vehicle", vehicleID + ".png");
         
             try {
                 Files.copy(this.imageFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
@@ -270,10 +267,7 @@ public class AddController {
             alert.setHeaderText("Product added successfully");
             alert.showAndWait();
 
-            String uri = path.split("file:/")[1].split(":")[1];
-
-            Path dest = Paths.get(uri, "img", "product", productID + ".png");
-            System.out.println(dest);
+            Path dest = Paths.get(path, "img", "product", productID + ".png");
 
             try {
                 Files.copy(this.imageFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);

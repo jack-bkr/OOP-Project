@@ -13,7 +13,8 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class Vehicle {
-    private static String path = dbController.getPath().split("file:/")[1];
+    private static String[] fullpath = dbController.getPath().split(":");
+    private static String path = fullpath[fullpath.length - 1];
 
     // Attributes; getters
 
@@ -50,7 +51,7 @@ public class Vehicle {
     public Image getImage(int width, int height) {
         InputStream is;
         try {
-            is = new FileInputStream(path + "img/vehicle/" + this.vehicleID + ".png");
+            is = new FileInputStream(path + "/img/vehicle/" + this.vehicleID + ".png");
             return new Image(new BufferedInputStream(is), width, height, true, false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
