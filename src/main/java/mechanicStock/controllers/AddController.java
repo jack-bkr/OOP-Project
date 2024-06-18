@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.nio.file.*;
 import java.io.IOException;
@@ -43,9 +43,9 @@ public class AddController {
     @FXML private Label productLabel;
     @FXML private ComboBox<Product> productComboBox;
     @FXML private Label buyPriceLabel;
-    @FXML private TextField buyPriceTextField;
+    @FXML private Spinner<Integer> buyPriceSpinner;
     @FXML private Label sellPriceLabel;
-    @FXML private TextField sellPriceTextField;
+    @FXML private Spinner<Integer> sellPriceSpinner;
     
     // Product
     @FXML private Label productNameLabel;
@@ -96,9 +96,15 @@ public class AddController {
         productLabel.setVisible(true);
         productComboBox.setVisible(true);
         buyPriceLabel.setVisible(true);
-        buyPriceTextField.setVisible(true);
+        buyPriceSpinner.setVisible(true);
         sellPriceLabel.setVisible(true);
-        sellPriceTextField.setVisible(true);
+        sellPriceSpinner.setVisible(true);
+
+        // Set Spinner Values
+        SpinnerValueFactory<Integer> buyValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1);
+        SpinnerValueFactory<Integer> sellValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 1);
+        buyPriceSpinner.setValueFactory(buyValueFactory);
+        sellPriceSpinner.setValueFactory(sellValueFactory);
 
         populateComboBoxes();
     }
@@ -186,8 +192,8 @@ public class AddController {
     public void addStock() {
         Vehicle vehicle = vehicleComboBox.getValue();
         Product product = productComboBox.getValue();
-        int buyPrice = Integer.parseInt(buyPriceTextField.getText());
-        int sellPrice = Integer.parseInt(sellPriceTextField.getText());
+        int buyPrice = buyPriceSpinner.getValue();
+        int sellPrice = sellPriceSpinner.getValue();
 
         if (vehicle == null || product == null || buyPrice == 0 || sellPrice == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -295,14 +301,6 @@ public class AddController {
             addProduct();
         } else {
             throw new IllegalArgumentException("Invalid table name");
-        }
-    }
-    
-    @FXML
-    protected void numericOnly(KeyEvent keyEvent) {
-        char input = keyEvent.getCharacter().charAt(0);
-        if (!Character.isDigit(input)) {
-            keyEvent.consume();
         }
     }
 

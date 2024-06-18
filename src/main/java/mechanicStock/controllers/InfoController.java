@@ -29,6 +29,7 @@ public class InfoController {
     @FXML private Button vehicleInfoButton;
     @FXML private Button approveButton;
     @FXML private Button toggleAdminButton;
+    @FXML private Button buySellButton;
 
     // Stock
     @FXML private Label productIDLabel;
@@ -72,6 +73,7 @@ public class InfoController {
         // Set Product and Vehicle Info Buttons visible
         productInfoButton.setVisible(true);
         vehicleInfoButton.setVisible(true);
+        buySellButton.setVisible(true);
 
         // Set Images Visible
         imageLabel.setVisible(true);
@@ -264,9 +266,11 @@ public class InfoController {
         if (table == "Stock") {
             alertContext += "Stock ID: " + idValueLabel.getText();
         } else if (table == "Product") {
-            alertContext += productNameValueLabel.getText() + ", it will also delete all Stock associated with this Product.";
+            alertContext += productNameValueLabel.getText()
+                    + ", it will also delete all Stock associated with this Product.";
         } else if (table == "Vehicle") {
-            alertContext += vehicleMakeValueLabel.getText() + " " + vehicleModelValueLabel.getText() + ", it will also delete all Stock associated with this Vehicle.";
+            alertContext += vehicleMakeValueLabel.getText() + " " + vehicleModelValueLabel.getText()
+                    + ", it will also delete all Stock associated with this Vehicle.";
         } else if (table == "User") {
             alertContext += userNameValueLabel.getText();
         }
@@ -276,7 +280,7 @@ public class InfoController {
         alert.setHeaderText("Confirm Deletion");
         alert.setContentText(alertContext);
         alert.showAndWait();
-        
+
         if (alert.getResult() == ButtonType.OK) {
             if (table == "Stock") {
                 deleteInfo(stock.deleteItem());
@@ -289,5 +293,10 @@ public class InfoController {
             }
         }
 
+    }
+    
+    @FXML
+    protected void handleBuySellButton(ActionEvent event) {
+        stock.buySell();
     }
 }

@@ -259,20 +259,28 @@
             onAction="#handleDeleteButton"/>
     </HBox>
 
-    <Button fx:id="approveButton"
-        id="infoButton"
-        text="Approve"
+    <HBox spacing="10"
         GridPane.columnIndex="0"
         GridPane.rowIndex="9"
-        visible="false"
-        onAction="#handleApproveButton"/>
+        GridPane.columnSpan="2"
+    >
+        <Button fx:id="buySellButton"
+            id="infoButton"
+            text="Buy/Sell"
+            onAction="#handleBuySellButton"
+            visible="false"/>
 
-    <Button fx:id="toggleAdminButton"
-        id="infoButton"
-        text="Make Admin"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="9"
-        visible="false"
-        onAction="#handleToggleAdminButton"/>
+        <Button fx:id="approveButton"
+            id="infoButton"
+            text="Approve"
+            visible="false"
+            onAction="#handleApproveButton"/>
+
+        <Button fx:id="toggleAdminButton"
+            id="infoButton"
+            text="Make Admin"
+            visible="false"
+            onAction="#handleToggleAdminButton"/>
+    </HBox>
     
 </GridPane>

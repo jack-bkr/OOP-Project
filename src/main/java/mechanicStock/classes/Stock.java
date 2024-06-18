@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mechanicStock.controllers.BuySellController;
 import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
@@ -18,9 +19,7 @@ public class Stock {
     private int vehicleID; public int getVehicleID() { return vehicleID; }
     private int stockQuantity; public int getStockQuantity() { return stockQuantity; }
     private int buyPrice; public int getBuyPrice() { return buyPrice; }
-
-    private int sellPrice;
-    public void setSellPrice(int Price) { this.sellPrice = Price; } public int getSellPrice() { return sellPrice; }
+    private int sellPrice; public int getSellPrice() { return sellPrice; }
 
     public Product product;
     public Vehicle vehicle;
@@ -73,6 +72,46 @@ public class Stock {
         }
 
         dbController.closeConnection(conn);
+        return success;
+    }
+
+    public void buySell() {
+        try {
+            Stage stage = (new Stage());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/BuySell.fxml"));
+            Parent root = loader.load();
+
+            BuySellController controller = loader.getController();
+            controller.recieveStock(this);
+
+            Scene changeScene = new Scene(root, 400, 400);
+            changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
+            stage.setScene(changeScene);
+            stage.setTitle("Buy/Sell Item");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean setQuantity(int quantity) {
+        this.stockQuantity = quantity;
+        String query = "UPDATE Stock SET stockQuantity = " + quantity + " WHERE stockID = " + this.stockID + ";";
+        Connection conn = dbController.openConnection();
+        Statement stmt = null;
+        boolean success = false;
+
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+            success = true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        dbController.closeConnection(conn);
+
         return success;
     }
 

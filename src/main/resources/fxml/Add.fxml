@@ -105,12 +105,12 @@
         GridPane.rowIndex="3"
         visible="false"/>
     
-    <TextField fx:id="buyPriceTextField"
-        id="buyPriceValueLabel"
-        onKeyTyped="#numericOnly"
+    <Spinner fx:id="buyPriceSpinner"
+        id="buyPriceSpinner"
         GridPane.columnIndex="1"
         GridPane.rowIndex="3"
-        visible="false"/>
+        visible="false"
+        editable="true"/>
     
     <Label fx:id="sellPriceLabel"
         id="sellPriceLabel"
@@ -119,12 +119,12 @@
         GridPane.rowIndex="4"
         visible="false"/>
 
-    <TextField fx:id="sellPriceTextField"
-        id="sellPriceTextField"
-        onKeyTyped="#numericOnly"
+    <Spinner fx:id="sellPriceSpinner"
+        id="sellPriceSpinner"
         GridPane.columnIndex="1"
         GridPane.rowIndex="4"
-        visible="false"/>
+        visible="false"
+        editable="true"/>
 
     <!-- Product Info -->
     <Label fx:id="productNameLabel"
