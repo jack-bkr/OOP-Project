@@ -30,6 +30,7 @@ public class InfoController {
     @FXML private Button approveButton;
     @FXML private Button toggleAdminButton;
     @FXML private Button buySellButton;
+    @FXML private Button printButton;
 
     // Stock
     @FXML private Label productIDLabel;
@@ -74,6 +75,7 @@ public class InfoController {
         productInfoButton.setVisible(true);
         vehicleInfoButton.setVisible(true);
         buySellButton.setVisible(true);
+        printButton.setVisible(true);
 
         // Set Images Visible
         imageLabel.setVisible(true);
@@ -298,5 +300,10 @@ public class InfoController {
     @FXML
     protected void handleBuySellButton(ActionEvent event) {
         stock.buySell();
+    }
+
+    @FXML
+    protected void handlePrintButton(ActionEvent event) {
+        stock.printInfo();
     }
 }

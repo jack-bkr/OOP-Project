@@ -282,5 +282,14 @@
             visible="false"
             onAction="#handleToggleAdminButton"/>
     </HBox>
+
+    <Button fx:id="printButton"
+        id="infoButton"
+        text="Print"
+        GridPane.columnIndex="0"
+        GridPane.rowIndex="10"
+        GridPane.columnSpan="2"
+        onAction="#handlePrintButton"
+        visible="false"/>
     
 </GridPane>

@@ -1,5 +1,8 @@
 package mechanicStock.controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -19,6 +22,9 @@ import javafx.stage.Stage;
 import mechanicStock.classes.*;
 
 public class MainAppController {
+    private static String[] fullpath = dbController.getPath().split(":");
+    private static String path = fullpath[fullpath.length - 1];
+
     @FXML
     Label welcomeLabel;
     @FXML
@@ -221,7 +227,7 @@ public class MainAppController {
     
     @FXML
     protected void handleAddStockButton(ActionEvent event) {
-        try { 
+        try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
             Parent root = loader.load();
@@ -239,4 +245,30 @@ public class MainAppController {
         }
     }
 
+    @FXML
+    protected void handlePrintAllStockButton(ActionEvent event) {
+        File file = new File(path + "\\Stock-All.txt");
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getPath());
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            FileWriter writer = new FileWriter(file);
+
+            BufferedWriter buffer = new BufferedWriter(writer);
+
+            ArrayList<Stock> stocks = Stock.getAllStock();
+
+            for (Stock stock : stocks) {
+                buffer = stock.writeBuffer(buffer);
+            }
+
+            buffer.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

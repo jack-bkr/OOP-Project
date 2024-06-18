@@ -1,5 +1,9 @@
 package mechanicStock.classes;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.Buffer;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,6 +16,9 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class Stock {
+    private static String[] fullpath = dbController.getPath().split(":");
+    private static String path = fullpath[fullpath.length - 1];
+
     // Attributes; getters
 
     private int stockID; public int getStockID() { return stockID; }
@@ -113,6 +120,59 @@ public class Stock {
         dbController.closeConnection(conn);
 
         return success;
+    }
+
+    public BufferedWriter writeBuffer(BufferedWriter buffer) {
+        try {
+            buffer.write("Stock ID: " + this.stockID);
+            buffer.newLine();
+            buffer.write("Product ID: " + this.productID);
+            buffer.newLine();
+            buffer.write("Product Name: " + this.product.getProductName());
+            buffer.newLine();
+            buffer.write("Product Description: " + this.product.getProductDescription());
+            buffer.newLine();
+            buffer.write("Vehicle ID: " + this.vehicleID);
+            buffer.newLine();
+            buffer.write("Vehicle Make: " + this.vehicle.getVehicleMake());
+            buffer.newLine();
+            buffer.write("Vehicle Model: " + this.vehicle.getVehicleModel());
+            buffer.newLine();
+            buffer.write("Stock Quantity: " + this.stockQuantity);
+            buffer.newLine();
+            buffer.write("Buy Price: " + this.buyPrice);
+            buffer.newLine();
+            buffer.write("Sell Price: " + this.sellPrice);
+            buffer.newLine();
+            buffer.newLine();
+
+            return buffer;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printInfo() {
+        File file = new File(path + "\\Stock-" + this.stockID + ".txt");
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getPath());
+            } else {
+                System.out.println("File already exists.");
+            }
+            
+            FileWriter writer = new FileWriter(file);
+
+            BufferedWriter buffer = new BufferedWriter(writer);
+
+            buffer = writeBuffer(buffer);
+
+            buffer.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public static Stock getStockByID(int ID) {
