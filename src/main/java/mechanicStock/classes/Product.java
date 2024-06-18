@@ -2,7 +2,6 @@ package mechanicStock.classes;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 import java.io.*;
 
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,7 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class Product {
-    private static String path = Product.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    private static String path = dbController.getPath().split("file:/")[1];
 
     // Attributes; getters
 

@@ -144,7 +144,7 @@ public class InfoController {
 
         // Set Image values
         imageLabel.setText("Vehicle Image");
-        imageView.setImage(new Image("/img/vehicle/" + vehicle.getVehicleID() + ".png", 0, 100, true, false));
+        imageView.setImage(vehicle.getImage(0, 100));
 
         // Set Vehicle Label Visible
         vehicleMakeLabel.setVisible(true);

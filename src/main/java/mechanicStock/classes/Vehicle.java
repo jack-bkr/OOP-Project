@@ -13,7 +13,7 @@ import mechanicStock.controllers.InfoController;
 import mechanicStock.controllers.dbController;
 
 public class Vehicle {
-    private static String path = Vehicle.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    private static String path = dbController.getPath().split("file:/")[1];
 
     // Attributes; getters
 

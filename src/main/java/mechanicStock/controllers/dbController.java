@@ -1,10 +1,21 @@
 package mechanicStock.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 
 public class dbController {
+    public static String getPath() {
+        URL rootPath = dbController.class.getProtectionDomain().getCodeSource().getLocation();
+        String URI = rootPath.toString();
+        String[] currentPath = URI.split("mechanicStock.jar");
+        currentPath[0] = currentPath[0].replaceAll("%20", " ");
+        return currentPath[0];
+    }
+        
     public static Connection openConnection() {
-        String dbURL = "jdbc:sqlite:" + dbController.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "mechanicStockDB.sqlite";
+        String dbURL = "jdbc:sqlite:" + getPath() + "mechanicStockDB.sqlite";
         Connection conn = null;
 
         try {
