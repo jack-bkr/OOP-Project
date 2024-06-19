@@ -22,6 +22,7 @@ public class ViewController {
     @SuppressWarnings("rawtypes")
     @FXML TableView table;
     @FXML TextField searchField;
+    @FXML Button AddButton;
 
     User user;
     boolean isAdmin;
@@ -34,6 +35,10 @@ public class ViewController {
         isAdmin = user.getIsAdmin();
         tableType = table;
         loadTable();
+
+        if (!isAdmin) {
+            AddButton.setDisable(true);
+        }
 
         Platform.runLater(() -> {
             
@@ -89,7 +94,7 @@ public class ViewController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Vehicle vehicle = row.getItem();
-                    vehicle.loadInfo();
+                    vehicle.loadInfo(user);
                 }
             });
             return row;
@@ -154,7 +159,7 @@ public class ViewController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Product product = row.getItem();
-                    product.loadInfo();
+                    product.loadInfo(user);
                 }
             });
             return row;
@@ -225,7 +230,7 @@ public class ViewController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     User user = row.getItem();
-                    user.loadInfo();
+                    user.loadInfo(this.user);
                 }
             });
             return row;

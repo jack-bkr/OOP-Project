@@ -254,7 +254,7 @@
             onAction="#handleProductInfoButton"/>
         
 
-        <Button fx:id="DeleteButton"
+        <Button fx:id="deleteButton"
             text="Delete"
             onAction="#handleDeleteButton"/>
     </HBox>

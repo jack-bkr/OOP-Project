@@ -14,6 +14,7 @@ public class InfoController {
     private Product product;
     private Vehicle vehicle;
     private User user;
+    private User currentUser;
 
     // FXML Attributes
     @FXML private Label idValueLabel;
@@ -31,6 +32,7 @@ public class InfoController {
     @FXML private Button toggleAdminButton;
     @FXML private Button buySellButton;
     @FXML private Button printButton;
+    @FXML private Button deleteButton;
 
     // Stock
     @FXML private Label productIDLabel;
@@ -66,6 +68,14 @@ public class InfoController {
     @FXML private Label dateRegisteredLabel;
     @FXML private Label dateRegisteredValueLabel;
     
+    public void recieveCurrentUser(User user) {
+        this.currentUser = user;
+        if (!user.getIsAdmin()) {
+            toggleAdminButton.setDisable(true);
+            approveButton.setDisable(true);
+            deleteButton.setDisable(true);
+        }
+    }
     
     public void recieveStock(Stock stock) {
         this.table = "Stock";
@@ -191,6 +201,11 @@ public class InfoController {
         isAdminValueLabel.setText(String.valueOf(user.getIsAdmin()));
         isAdminApprovedValueLabel.setText(String.valueOf(user.getAdminApproved()));
         dateRegisteredValueLabel.setText(String.valueOf(user.getDateRegistered()));
+
+        if (this.currentUser.getUserID() == user.getUserID()) {
+            toggleAdminButton.setDisable(true);
+            deleteButton.setDisable(true);
+        }
     }
 
     public void deleteInfo(boolean success) {
@@ -212,12 +227,12 @@ public class InfoController {
 
     @FXML
     protected void handleProductInfoButton(ActionEvent event) {
-        stock.product.loadInfo();
+        stock.product.loadInfo(currentUser);
     }
 
     @FXML
     protected void handleVehicleInfoButton(ActionEvent event) {
-        stock.vehicle.loadInfo();
+        stock.vehicle.loadInfo(currentUser);
     }
 
     @FXML

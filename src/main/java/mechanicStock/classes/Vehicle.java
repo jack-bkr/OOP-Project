@@ -29,16 +29,17 @@ public class Vehicle {
         this.vehicleModel = Model;
     }
 
-    public void loadInfo() {
+    public void loadInfo(User user) {
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
             Parent root = loader.load();
 
             InfoController controller = loader.getController();
+            controller.recieveCurrentUser(user);
             controller.recieveVehicle(this);
 
-            Scene changeScene = new Scene(root, 400, 400);
+            Scene changeScene = new Scene(root, 400, 450);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Item Info");

@@ -3,7 +3,6 @@ package mechanicStock.classes;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.Buffer;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -43,16 +42,17 @@ public class Stock {
         this.vehicle = Vehicle.getVehicleByID(vID);
     }
 
-    public void loadInfo() {
+    public void loadInfo(User user) {
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
             Parent root = loader.load();
 
             InfoController controller = loader.getController();
+            controller.recieveCurrentUser(user);
             controller.recieveStock(this);
 
-            Scene changeScene = new Scene(root, 400, 400);
+            Scene changeScene = new Scene(root, 400, 450);
             changeScene.getStylesheets().add(getClass().getClassLoader().getResource("css/Main.css").toExternalForm());
             stage.setScene(changeScene);
             stage.setTitle("Item Info");

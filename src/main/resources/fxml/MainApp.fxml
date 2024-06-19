@@ -104,13 +104,6 @@
         GridPane.rowIndex="2"
         onAction="#handleViewUsersButton"/>
 
-    <Button fx:id="PrintAllButton"
-        id="mainWindowButton"
-        text="Print All Stock Information"
-        GridPane.columnIndex="3"
-        GridPane.rowIndex="2"
-        onAction="#handlePrintAllButton"/>
-
     <Button fx:id="PrintStockButton"
         id="mainWindowButton"
         text="Print All Stock Information"

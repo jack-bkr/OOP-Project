@@ -25,12 +25,10 @@ public class MainAppController {
     private static String[] fullpath = dbController.getPath().split(":");
     private static String path = fullpath[fullpath.length - 1];
 
-    @FXML
-    Label welcomeLabel;
-    @FXML
-    TableView<Item> table;
-    @FXML
-    TextField searchField;
+    @FXML Label welcomeLabel;
+    @FXML TableView<Item> table;
+    @FXML TextField searchField;
+    @FXML Button AddStockButton;
 
     User user;
     boolean isAdmin;
@@ -44,7 +42,7 @@ public class MainAppController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Item item = row.getItem();
-                    item.loadInfo();
+                    item.loadInfo(this.user);
                 }
             });
             return row;
@@ -98,9 +96,12 @@ public class MainAppController {
     }
     
     public void recieveUser(User User) {
-        user = User;
+        this.user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
+        if (!isAdmin) {
+            AddStockButton.setDisable(true);
+        }
     }
 
     
