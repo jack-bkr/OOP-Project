@@ -22,3 +22,6 @@ gradlew run
 ```
 
 Or you can run the jar file directly, found in [releases](https://github.com/jack-bkr/OOP-Project/releases).
+
+Username: ```Jack```
+Password: ```asdf```
