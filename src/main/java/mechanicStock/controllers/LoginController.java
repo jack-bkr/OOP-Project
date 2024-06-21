@@ -1,5 +1,11 @@
 package mechanicStock.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +22,26 @@ public class LoginController {
     private TextField userNameTextField;
     @FXML private PasswordField passwordTextField;
     
+
+    public void initialize() {
+        File f = new File(dbController.getPath() + "\\mechanicStockDB.sqlite");
+        if (!f.exists()) {
+            try {
+                InputStream dbIS = getClass().getClassLoader().getResourceAsStream("mechanicStockDB.sqlite");
+                Files.copy(dbIS, Paths.get(dbController.getPath() + "/mechanicStockDB.sqlite"));
+                Files.createDirectories(Paths.get(dbController.getPath() + "/img/product"));
+                Files.createDirectories(Paths.get(dbController.getPath() + "/img/vehicle"));
+                InputStream p1ImgIS = getClass().getClassLoader().getResourceAsStream("img/product/1.png");
+                Files.copy(p1ImgIS, Paths.get(dbController.getPath() + "/img/product/1.png"));
+                InputStream v1ImgIS = getClass().getClassLoader().getResourceAsStream("img/vehicle/1.png");
+                Files.copy(v1ImgIS, Paths.get(dbController.getPath() + "/img/vehicle/1.png"));
+                InputStream v2ImgIS = getClass().getClassLoader().getResourceAsStream("img/vehicle/2.png");
+                Files.copy(v2ImgIS, Paths.get(dbController.getPath() + "/img/vehicle/2.png"));
+            } catch (IOException e) {
+                throw new RuntimeException("Error creating database file", e);
+            }
+        }
+    }
 
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws Exception {
