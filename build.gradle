@@ -19,7 +19,10 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation group: 'org.testfx', name: 'testfx-core', version:'4.0.16-alpha'
+    testImplementation group: 'org.testfx', name:'testfx-junit5', version:'4.0.16-alpha'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
@@ -34,6 +37,10 @@ dependencies {
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
 
+}
+
+test {
+    useJUnitPlatform()
 }
 
 javafx {
