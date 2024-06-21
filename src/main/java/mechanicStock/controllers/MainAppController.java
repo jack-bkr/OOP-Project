@@ -220,12 +220,7 @@ public class MainAppController {
             e.printStackTrace();
         }
     }
-    
-    @FXML
-    protected void handlePrintAllButton(ActionEvent event) {
 
-    }
-    
     @FXML
     protected void handleAddStockButton(ActionEvent event) {
         try {

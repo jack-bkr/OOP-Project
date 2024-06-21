@@ -16,13 +16,6 @@ public class Item extends Stock {
         this.productName = super.product.getProductName();
         this.productDescription = super.product.getProductDescription();
     }
-
-    public String getInfo() {   //returns a string with all the information of the item, as displayed in the table
-        return "ID: " + super.getStockID() + ", Vehicle: " + vehicleName + ", Product Name: " + super.product.getProductName()
-                + ", Product Description: " + super.product.getProductDescription() + ", Quantity: "
-                + super.getStockQuantity()
-                + ", Buy Price: " + super.getBuyPrice() + ", Sell Price: " + super.getSellPrice();
-    }
     
     public static ArrayList<Item> getAllItems() {   //returns an arraylist of all items in the stock
         ArrayList<Item> items = new ArrayList<Item>();

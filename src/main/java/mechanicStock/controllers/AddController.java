@@ -152,7 +152,9 @@ public class AddController {
         }
 
         vehicleComboBox.setItems(vehicles);
+        vehicleComboBox.selectionModelProperty().get().selectFirst();
         productComboBox.setItems(products);
+        productComboBox.selectionModelProperty().get().selectFirst();
     }
 
     public void addUser() {

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class ViewController {
     @FXML Label welcomeLabel;
     @SuppressWarnings("rawtypes")
-    @FXML TableView table;
-    @FXML TextField searchField;
+    @FXML TableView viewTable;
+    @FXML TextField viewSearchField;
     @FXML Button AddButton;
 
     User user;
@@ -57,7 +57,7 @@ public class ViewController {
     }
 
     public void loadTable() {
-        table.getColumns().clear();
+        viewTable.getColumns().clear();
 
         if (tableType.equals("Vehicles")) {
             recieveVehicles(Vehicle.getAllVehicles());
@@ -79,7 +79,7 @@ public class ViewController {
         TableColumn<Vehicle, String> modelColumn = new TableColumn<>("Model");
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleModel"));
 
-        table.getColumns().addAll(idColumn, makeColumn, modelColumn);
+        viewTable.getColumns().addAll(idColumn, makeColumn, modelColumn);
 
         ObservableList<Vehicle> data = FXCollections.observableArrayList();
 
@@ -87,9 +87,9 @@ public class ViewController {
             data.add(vehicle);
         }
 
-        table.setItems(data);
+        viewTable.setItems(data);
 
-        table.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> {
             TableRow<Vehicle> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -103,7 +103,7 @@ public class ViewController {
         FilteredList<Vehicle> filteredData = new FilteredList<Vehicle>(data, b -> true);
 		
 		// Set the filter Predicate whenever the filter changes.
-		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+		viewSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(vehicle -> {
 				// If filter text is empty, display all vehicles.
 								
@@ -127,10 +127,10 @@ public class ViewController {
 		
 		// Bind the SortedList comparator to the TableView comparator.
 		// Otherwise, sorting the TableView would have no effect.
-		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		sortedData.comparatorProperty().bind(viewTable.comparatorProperty());
 		
-		// Add sorted (and filtered) data to the table.
-		table.setItems(sortedData);
+		// Add sorted (and filtered) data to the viewTable.
+		viewTable.setItems(sortedData);
     }
 
     @SuppressWarnings("unchecked")
@@ -144,7 +144,7 @@ public class ViewController {
         TableColumn<Product, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
 
-        table.getColumns().addAll(idColumn, nameColumn, descriptionColumn);
+        viewTable.getColumns().addAll(idColumn, nameColumn, descriptionColumn);
 
         ObservableList<Product> data = FXCollections.observableArrayList();
 
@@ -152,9 +152,9 @@ public class ViewController {
             data.add(product);
         }
 
-        table.setItems(data);
+        viewTable.setItems(data);
 
-        table.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> {
             TableRow<Product> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -168,7 +168,7 @@ public class ViewController {
         FilteredList<Product> filteredData = new FilteredList<Product>(data, b -> true);
 		
 		// Set the filter Predicate whenever the filter changes.
-		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+		viewSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(product -> {
 				// If filter text is empty, display all products.
 								
@@ -192,10 +192,10 @@ public class ViewController {
 		
 		// Bind the SortedList comparator to the TableView comparator.
 		// Otherwise, sorting the TableView would have no effect.
-		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		sortedData.comparatorProperty().bind(viewTable.comparatorProperty());
 		
-		// Add sorted (and filtered) data to the table.
-		table.setItems(sortedData);
+		// Add sorted (and filtered) data to the viewTable.
+		viewTable.setItems(sortedData);
     }
 
     @SuppressWarnings("unchecked")
@@ -215,7 +215,7 @@ public class ViewController {
         TableColumn<User, String> dateColumn = new TableColumn<>("Date Registered");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateRegistered"));
 
-        table.getColumns().addAll(idColumn, nameColumn, adminColumn, approvedColumn, dateColumn);
+        viewTable.getColumns().addAll(idColumn, nameColumn, adminColumn, approvedColumn, dateColumn);
 
         ObservableList<User> data = FXCollections.observableArrayList();
 
@@ -223,9 +223,9 @@ public class ViewController {
             data.add(user);
         }
 
-        table.setItems(data);
+        viewTable.setItems(data);
 
-        table.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> {
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -239,7 +239,7 @@ public class ViewController {
         FilteredList<User> filteredData = new FilteredList<User>(data, b -> true);
 		
 		// Set the filter Predicate whenever the filter changes.
-		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+		viewSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(user -> {
 				// If filter text is empty, display all persons.
 								
@@ -261,10 +261,10 @@ public class ViewController {
 		
 		// Bind the SortedList comparator to the TableView comparator.
 		// Otherwise, sorting the TableView would have no effect.
-		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		sortedData.comparatorProperty().bind(viewTable.comparatorProperty());
 		
-		// Add sorted (and filtered) data to the table.
-		table.setItems(sortedData);
+		// Add sorted (and filtered) data to the viewTable.
+		viewTable.setItems(sortedData);
     }
 
     @FXML 

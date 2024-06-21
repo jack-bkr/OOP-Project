@@ -42,7 +42,8 @@
         GridPane.rowIndex="1"
         editable="true"
         onMouseClicked="#handleSpinnerChange"
-        onKeyTyped="#handleSpinnerChange"/>
+        onKeyTyped="#handleSpinnerChange"
+        onKeyPressed="#handleSpinnerChange"/>
 
     <Label fx:id="valueLabel"
         id="valueLabel"

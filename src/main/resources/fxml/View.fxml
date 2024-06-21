@@ -67,13 +67,13 @@
         GridPane.rowIndex="0"
         GridPane.halignment="RIGHT"/>
 
-    <TextField fx:id="searchField"
+    <TextField fx:id="viewSearchField"
         GridPane.columnIndex="7"
         GridPane.rowIndex="0"
         GridPane.columnSpan="2"/>
 
 
-    <TableView fx:id="table"
+    <TableView fx:id="viewTable"
         GridPane.columnIndex="0"
         GridPane.rowIndex="1"
         GridPane.columnSpan="8"/>
