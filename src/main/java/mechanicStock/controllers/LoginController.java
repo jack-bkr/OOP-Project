@@ -3,8 +3,10 @@ package mechanicStock.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,18 +27,28 @@ public class LoginController {
 
     public void initialize() {
         File f = new File(dbController.getPath() + "\\mechanicStockDB.sqlite");
+        ArrayList<InputStream> vIS = new ArrayList<>();
+        ArrayList<InputStream> pIS = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            vIS.add(getClass().getClassLoader().getResourceAsStream("img/vehicle/" + i + ".png"));
+        }
+        for (int i = 1; i <= 8; i++) {
+            pIS.add(getClass().getClassLoader().getResourceAsStream("img/product/" + i + ".png"));
+        }
+
         if (!f.exists()) {
             try {
                 InputStream dbIS = getClass().getClassLoader().getResourceAsStream("mechanicStockDB.sqlite");
                 Files.copy(dbIS, Paths.get(dbController.getPath() + "/mechanicStockDB.sqlite"));
                 Files.createDirectories(Paths.get(dbController.getPath() + "/img/product"));
                 Files.createDirectories(Paths.get(dbController.getPath() + "/img/vehicle"));
-                InputStream p1ImgIS = getClass().getClassLoader().getResourceAsStream("img/product/1.png");
-                Files.copy(p1ImgIS, Paths.get(dbController.getPath() + "/img/product/1.png"));
-                InputStream v1ImgIS = getClass().getClassLoader().getResourceAsStream("img/vehicle/1.png");
-                Files.copy(v1ImgIS, Paths.get(dbController.getPath() + "/img/vehicle/1.png"));
-                InputStream v2ImgIS = getClass().getClassLoader().getResourceAsStream("img/vehicle/2.png");
-                Files.copy(v2ImgIS, Paths.get(dbController.getPath() + "/img/vehicle/2.png"));
+                for (int i = 1; i <= 5; i++) {
+                    Files.copy(vIS.get(i - 1), Paths.get(dbController.getPath() + "/img/vehicle/" + i + ".png"));
+                }
+                for (int i = 1; i <= 8; i++) {
+                    Files.copy(pIS.get(i - 1), Paths.get(dbController.getPath() + "/img/product/" + i + ".png"));
+                }
             } catch (IOException e) {
                 throw new RuntimeException("Error creating database file", e);
             }
