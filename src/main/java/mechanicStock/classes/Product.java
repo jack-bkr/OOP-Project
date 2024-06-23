@@ -53,7 +53,7 @@ public class Product {
         InputStream is;
         try {
             is = new FileInputStream(path + "/img/product/" + this.productID + ".png");
-            return new Image(new BufferedInputStream(is), width, height, true, false);
+            return new Image(new BufferedInputStream(is), width, height, true, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

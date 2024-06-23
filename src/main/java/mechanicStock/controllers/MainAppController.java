@@ -56,7 +56,7 @@ public class MainAppController {
                     if (onShown)
                     {
                         table.getColumns().clear();
-                        populateTable(table);
+                        initialize();
                     }
                 }
             });

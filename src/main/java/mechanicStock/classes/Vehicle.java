@@ -53,7 +53,7 @@ public class Vehicle {
         InputStream is;
         try {
             is = new FileInputStream(path + "/img/vehicle/" + this.vehicleID + ".png");
-            return new Image(new BufferedInputStream(is), width, height, true, false);
+            return new Image(new BufferedInputStream(is), width, height, true, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
