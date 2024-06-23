@@ -230,6 +230,29 @@ public class Stock {
         dbController.closeConnection(conn);
         return stocks;
     }
+
+    public static int getTotalStockValue() {
+        String query = "SELECT SUM(stockQuantity * buyPrice) FROM Stock;";
+        Connection conn = dbController.openConnection();
+        Statement stmt = null;
+        int totalValue = 0;
+
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                totalValue = rs.getInt(1);
+            }
+
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        dbController.closeConnection(conn);
+        return totalValue;
+    }
     
     public static boolean addStock(int vID, int pID, int quantity, int buyPrice, int sellPrice) {
         String query = "INSERT INTO Stock (productID, vehicleID, stockQuantity, buyPrice, sellPrice) VALUES (" + pID

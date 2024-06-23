@@ -261,6 +261,8 @@ public class MainAppController {
                 buffer = stock.writeBuffer(buffer);
             }
 
+            buffer.write("Total Stock Value: £" + Stock.getTotalStockValue() + "\n");
+
             buffer.close();
 
         } catch (Exception e) {

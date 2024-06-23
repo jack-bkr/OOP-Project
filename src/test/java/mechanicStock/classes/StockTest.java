@@ -79,4 +79,15 @@ public class StockTest {
         File file = new File(path + "\\Stock-" + stock.getStockID() + ".txt");
         assertTrue(file.isFile());
     }
+
+    @Test
+    void testGetTotalStockValue() {
+        int totalValue = 0;
+
+        for (Stock stock : stocks) {
+            totalValue += stock.getStockQuantity() * stock.getBuyPrice();
+        }
+
+        assertEquals(totalValue, Stock.getTotalStockValue());
+    }
 }
