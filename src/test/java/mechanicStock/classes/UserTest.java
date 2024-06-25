@@ -52,6 +52,7 @@ class UserTest {
     @Test
     void testRegisterUser() {
         assertTrue(User.registerUser("testUser", "newPassword"));
+        User.getUserByUserName("testUser").deleteItem();
     }
 
     @Test
@@ -78,6 +79,9 @@ class UserTest {
     void testToggleAdmin() {
         User testUser = User.getUserByUserName("Jack");
         assertTrue(testUser.toggleAdmin());
+        if (!testUser.getIsAdmin()) {
+            testUser.toggleAdmin();
+        }
     }
 
     @Test
