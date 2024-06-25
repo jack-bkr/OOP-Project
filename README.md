@@ -1,5 +1,7 @@
 # BS2202 Object Oriented Software Development
 
+For building and running ensure you have JDK 17 installed. You can download it from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17) or Microsoft's build of [openJDK](https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-17). 
+
 ## Building 
 
 To build the project, clone it with the following command:
