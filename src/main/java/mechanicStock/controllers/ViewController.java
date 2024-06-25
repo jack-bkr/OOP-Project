@@ -29,7 +29,7 @@ public class ViewController {
     int selectedID;
     String tableType;
 
-    public void recieveSender(User User, String table) {
+    public void recieveSender(User User, String table) { //recieves the user and table type
         user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
@@ -40,7 +40,7 @@ public class ViewController {
             AddButton.setDisable(true);
         }
 
-        Platform.runLater(() -> {
+        Platform.runLater(() -> {  //refreshes the table when the window is focused
             
             welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
             {
@@ -56,7 +56,7 @@ public class ViewController {
         });
     }
 
-    public void loadTable() {
+    public void loadTable() { //loads the table
         viewTable.getColumns().clear();
 
         if (tableType.equals("Vehicles")) {
@@ -69,7 +69,7 @@ public class ViewController {
     }
 
     @SuppressWarnings("unchecked")
-    public void recieveVehicles(ArrayList<Vehicle> vehicles) {
+    public void recieveVehicles(ArrayList<Vehicle> vehicles) { //recieves the vehicles
         TableColumn<Vehicle, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleID"));
 
@@ -79,17 +79,17 @@ public class ViewController {
         TableColumn<Vehicle, String> modelColumn = new TableColumn<>("Model");
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleModel"));
 
-        viewTable.getColumns().addAll(idColumn, makeColumn, modelColumn);
+        viewTable.getColumns().addAll(idColumn, makeColumn, modelColumn); //adds the columns to the table
 
         ObservableList<Vehicle> data = FXCollections.observableArrayList();
 
-        for (Vehicle vehicle : vehicles) {
+        for (Vehicle vehicle : vehicles) { //adds the vehicles to the table
             data.add(vehicle);
         }
 
         viewTable.setItems(data);
 
-        viewTable.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> { //double click to view vehicle info
             TableRow<Vehicle> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -99,6 +99,8 @@ public class ViewController {
             });
             return row;
         });
+
+        // Searching functionality.
 
         FilteredList<Vehicle> filteredData = new FilteredList<Vehicle>(data, b -> true);
 		
@@ -134,7 +136,7 @@ public class ViewController {
     }
 
     @SuppressWarnings("unchecked")
-    public void recieveProducts(ArrayList<Product> products) {
+    public void recieveProducts(ArrayList<Product> products) { //recieves the products
         TableColumn<Product, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
 
@@ -144,17 +146,17 @@ public class ViewController {
         TableColumn<Product, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
 
-        viewTable.getColumns().addAll(idColumn, nameColumn, descriptionColumn);
+        viewTable.getColumns().addAll(idColumn, nameColumn, descriptionColumn); //adds the columns to the table
 
         ObservableList<Product> data = FXCollections.observableArrayList();
 
-        for (Product product : products) {
+        for (Product product : products) { //adds the products to the table
             data.add(product);
         }
 
         viewTable.setItems(data);
 
-        viewTable.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> { //double click to view product info
             TableRow<Product> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -164,6 +166,8 @@ public class ViewController {
             });
             return row;
         });
+
+        // Search functionality.
 
         FilteredList<Product> filteredData = new FilteredList<Product>(data, b -> true);
 		
@@ -199,7 +203,7 @@ public class ViewController {
     }
 
     @SuppressWarnings("unchecked")
-    public void recieveUsers(ArrayList<User> users) {
+    public void recieveUsers(ArrayList<User> users) { //recieves the users
         TableColumn<User, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
@@ -215,17 +219,17 @@ public class ViewController {
         TableColumn<User, String> dateColumn = new TableColumn<>("Date Registered");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateRegistered"));
 
-        viewTable.getColumns().addAll(idColumn, nameColumn, adminColumn, approvedColumn, dateColumn);
+        viewTable.getColumns().addAll(idColumn, nameColumn, adminColumn, approvedColumn, dateColumn); //adds the columns to the table
 
         ObservableList<User> data = FXCollections.observableArrayList();
 
-        for (User user : users) {
+        for (User user : users) { //adds the users to the table
             data.add(user);
         }
 
         viewTable.setItems(data);
 
-        viewTable.setRowFactory(tv -> {
+        viewTable.setRowFactory(tv -> { //double click to view user info
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -235,6 +239,8 @@ public class ViewController {
             });
             return row;
         });
+
+        // Search functionality.
 
         FilteredList<User> filteredData = new FilteredList<User>(data, b -> true);
 		
@@ -268,7 +274,7 @@ public class ViewController {
     }
 
     @FXML 
-    protected void handleAddButton(ActionEvent event) {
+    protected void handleAddButton(ActionEvent event) { //handles the add button
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));

@@ -59,22 +59,22 @@ public class AddController {
     @FXML private Label vehicleModelLabel;
     @FXML private TextField vehicleModelTextField;
 
-    public void recieveTable(String table) {
+    public void recieveTable(String table) { //recieves the table name from the previous controller
         this.table = table;
-        if (this.table == "Users") {
+        if (this.table == "Users") { //if the table is users, show the user fields
             showUser();
-        } else if (this.table == "Stock") {
+        } else if (this.table == "Stock") { //if the table is stock, show the stock fields
             showStock();
-        } else if (this.table == "Vehicles") {
+        } else if (this.table == "Vehicles") { //if the table is vehicles, show the vehicle fields
             showVehicle();
-        } else if (this.table == "Products") {
+        } else if (this.table == "Products") { //if the table is products, show the product fields
             showProduct();
         } else {
             throw new IllegalArgumentException("Invalid table name");
         }
     }
 
-    public void showUser() {
+    public void showUser() { //shows the user fields
         titleLabel.setText("Register");
 
         // Show User Fields
@@ -87,7 +87,7 @@ public class AddController {
 
     }
 
-    public void showStock() {
+    public void showStock() { //shows the stock fields
         titleLabel.setText("Add Stock");
 
         // Show Stock Fields
@@ -109,7 +109,7 @@ public class AddController {
         populateComboBoxes();
     }
 
-    public void showVehicle() {
+    public void showVehicle() { //shows the vehicle fields
         titleLabel.setText("Add Vehicle");
 
         // Show Vehicle Fields
@@ -124,7 +124,7 @@ public class AddController {
         imageNameLabel.setVisible(true);
     }
 
-    public void showProduct() {
+    public void showProduct() { //shows the product fields
         titleLabel.setText("Add Product");
 
         // Show Product Fields
@@ -139,15 +139,15 @@ public class AddController {
         imageNameLabel.setVisible(true);
     }
 
-    public void populateComboBoxes() {
+    public void populateComboBoxes() { //populates the comboboxes with the vehicles and products
         ObservableList<Vehicle> vehicles = FXCollections.observableArrayList();
         ObservableList<Product> products = FXCollections.observableArrayList();
 
-        for (Vehicle vehicle : Vehicle.getAllVehicles()) {
+        for (Vehicle vehicle : Vehicle.getAllVehicles()) { //for each vehicle, add it to the vehicles combobox
             vehicles.add(vehicle);
         }
 
-        for (Product product : Product.getAllProducts()) {
+        for (Product product : Product.getAllProducts()) { //for each product, add it to the products combobox
             products.add(product);
         }
 
@@ -157,12 +157,12 @@ public class AddController {
         productComboBox.selectionModelProperty().get().selectFirst();
     }
 
-    public void addUser() {
+    public void addUser() { //adds a user
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirmPassword = confirmPasswordTextField.getText();
 
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) { //if any of the fields are empty, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("All fields must be filled out");
@@ -170,7 +170,7 @@ public class AddController {
             return;
         }
 
-        if (!password.equals(confirmPassword)) {
+        if (!password.equals(confirmPassword)) { //if the passwords do not match, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Passwords do not match");
@@ -178,12 +178,12 @@ public class AddController {
             return;
         }
 
-        if (User.registerUser(username, password)) {
+        if (User.registerUser(username, password)) { //if the user is registered successfully, show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("User registered successfully, awaiting admin approval");
             alert.showAndWait();
-        } else {
+        } else { //if the user could not be registered, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("User could not be registered");
@@ -191,13 +191,13 @@ public class AddController {
         }
     }
 
-    public void addStock() {
+    public void addStock() { //adds stock
         Vehicle vehicle = vehicleComboBox.getValue();
         Product product = productComboBox.getValue();
         int buyPrice = buyPriceSpinner.getValue();
         int sellPrice = sellPriceSpinner.getValue();
 
-        if (vehicle == null || product == null || buyPrice == 0 || sellPrice == 0) {
+        if (vehicle == null || product == null || buyPrice == 0 || sellPrice == 0) { //if any of the fields are empty, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("All fields must be filled out");
@@ -205,12 +205,12 @@ public class AddController {
             return;
         }
 
-        if (Stock.addStock(vehicle.getVehicleID(), product.getProductID(), 0, buyPrice, sellPrice)) {
+        if (Stock.addStock(vehicle.getVehicleID(), product.getProductID(), 0, buyPrice, sellPrice)) { //if the stock is added successfully, show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Stock added successfully");
             alert.showAndWait();
-        } else {
+        } else { //if the stock could not be added, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Stock could not be added");
@@ -218,12 +218,12 @@ public class AddController {
         }
     }
 
-    public void addVehicle() {
+    public void addVehicle() { //adds a vehicle
         String make = vehicleMakeTextField.getText();
         String model = vehicleModelTextField.getText();
         int vehicleID;
 
-        if (make.isEmpty() || model.isEmpty() || this.imageFile == null) {
+        if (make.isEmpty() || model.isEmpty() || this.imageFile == null) { //if any of the fields are empty, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("All fields must be filled out");
@@ -231,9 +231,9 @@ public class AddController {
             return;
         }
 
-        vehicleID = Vehicle.addVehicle(make, model);
+        vehicleID = Vehicle.addVehicle(make, model); //adds the vehicle to the database
 
-        if (vehicleID > 0) {
+        if (vehicleID > 0) { //if the vehicle is added successfully, show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Vehicle added successfully");
@@ -241,12 +241,12 @@ public class AddController {
 
             Path dest = Paths.get(path, "img", "vehicle", vehicleID + ".png");
         
-            try {
+            try { //copies the image to the img/vehicle folder
                 Files.copy(this.imageFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        } else { //if the vehicle could not be added, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Vehicle could not be added");
@@ -254,12 +254,12 @@ public class AddController {
         }
     }
 
-    public void addProduct() {
+    public void addProduct() { //adds a product
         String name = productNameTextField.getText();
         String description = productDescriptionTextField.getText();
         int productID;
 
-        if (name.isEmpty() || description.isEmpty() || this.imageFile == null) {
+        if (name.isEmpty() || description.isEmpty() || this.imageFile == null) { //if any of the fields are empty, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("All fields must be filled out");
@@ -267,9 +267,9 @@ public class AddController {
             return;
         }
 
-        productID = Product.addProduct(name, description);
+        productID = Product.addProduct(name, description); //adds the product to the database
 
-        if (productID > 0) {
+        if (productID > 0) { //if the product is added successfully, show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Product added successfully");
@@ -277,13 +277,13 @@ public class AddController {
 
             Path dest = Paths.get(path, "img", "product", productID + ".png");
 
-            try {
+            try { //copies the image to the img/product folder
                 Files.copy(this.imageFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             
-        } else {
+        } else { //if the product could not be added, show an error
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Product could not be added");
@@ -292,7 +292,7 @@ public class AddController {
     }
 
     @FXML
-    protected void add(ActionEvent event) {
+    protected void add(ActionEvent event) { //adds the item, depending on the table
         if (this.table == "Users") {
             addUser();
         } else if (this.table == "Stock") {
@@ -307,7 +307,7 @@ public class AddController {
     }
 
     @FXML
-    protected void selectImage(ActionEvent event) {
+    protected void selectImage(ActionEvent event) { //opens a file chooser to select an image
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");

@@ -33,11 +33,11 @@ public class MainAppController {
     User user;
     boolean isAdmin;
     
-    public void initialize() {
+    public void initialize() { //initializes the program
         @SuppressWarnings("unchecked")
-        ObservableList<Item> data = populateTable(table);
+        ObservableList<Item> data = populateTable(table); //populates the table with the stock items
         
-        table.setRowFactory(tv -> {
+        table.setRowFactory(tv -> { //double click to view item info
             TableRow<Item> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -47,7 +47,7 @@ public class MainAppController {
             });
             return row;
         });
-        Platform.runLater(() -> {
+        Platform.runLater(() -> { //refreshes the table when the window is focused
             welcomeLabel.getScene().getWindow().focusedProperty().addListener(new ChangeListener<Boolean>()
             {
                 @Override
@@ -61,6 +61,8 @@ public class MainAppController {
                 }
             });
         });
+
+        // Search functionality
 
         FilteredList<Item> filteredData = new FilteredList<Item>(data, b -> true);
 		
@@ -95,7 +97,7 @@ public class MainAppController {
 		table.setItems(sortedData);
     }
     
-    public void recieveUser(User User) {
+    public void recieveUser(User User) { //recieves the user
         this.user = User;
         welcomeLabel.setText("Welcome, " + user.getUserName());
         isAdmin = user.getIsAdmin();
@@ -106,8 +108,8 @@ public class MainAppController {
 
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static ObservableList populateTable(TableView<Item> table) {
-        ArrayList<Item> items = Item.getAllItems();
+    public static ObservableList populateTable(TableView<Item> table) { //populates the table with the stock items
+        ArrayList<Item> items = Item.getAllItems(); //gets all the items from the database
 
         TableColumn<Item, Integer> stockIDColumn = new TableColumn<>("stockID");
         stockIDColumn.setCellValueFactory(new PropertyValueFactory<>("stockID"));
@@ -131,21 +133,21 @@ public class MainAppController {
         sellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("sellPrice"));
 
         table.getColumns().addAll(stockIDColumn, vehicleNameColumn, productNameColumn, productDescColumn,
-                quantityColumn, buyPriceColumn, sellPriceColumn);
+                quantityColumn, buyPriceColumn, sellPriceColumn); //adds the columns to the table
 
-        ObservableList<Item> data = FXCollections.observableArrayList();
+        ObservableList<Item> data = FXCollections.observableArrayList(); 
 
-        for (Item item : items) {
+        for (Item item : items) { //adds the items to the observable list
             data.add(item);
         }
 
-        table.setItems(data);
+        table.setItems(data); //sets the items to the table
 
         return data;
     }
     
     @FXML 
-    protected void handleLogoutButton(ActionEvent event) {
+    protected void handleLogoutButton(ActionEvent event) { //handles the logout button
         try {
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Login.fxml"));
@@ -162,7 +164,7 @@ public class MainAppController {
     }
     
     @FXML 
-    protected void handleViewProductsButton(ActionEvent event) {
+    protected void handleViewProductsButton(ActionEvent event) { //handles the view products button
         try { 
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
@@ -182,7 +184,7 @@ public class MainAppController {
     }
     
     @FXML
-    protected void handleViewVehiclesButton(ActionEvent event) {
+    protected void handleViewVehiclesButton(ActionEvent event) { //handles the view vehicles button
         try { 
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
@@ -202,7 +204,7 @@ public class MainAppController {
     }
     
     @FXML
-    protected void handleViewUsersButton(ActionEvent event) {
+    protected void handleViewUsersButton(ActionEvent event) { //handles the view users button
         try { 
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/View.fxml"));
@@ -222,7 +224,7 @@ public class MainAppController {
     }
 
     @FXML
-    protected void handleAddStockButton(ActionEvent event) {
+    protected void handleAddStockButton(ActionEvent event) { //handles the add stock button
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));
@@ -242,8 +244,8 @@ public class MainAppController {
     }
 
     @FXML
-    protected void handlePrintAllStockButton(ActionEvent event) {
-        File file = new File(path + "\\Stock-All.txt");
+    protected void handlePrintAllStockButton(ActionEvent event) { //handles the print all stock button
+        File file = new File(path + "\\Stock-All.txt"); //creates a new file
         try {
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getPath());
@@ -255,15 +257,15 @@ public class MainAppController {
 
             BufferedWriter buffer = new BufferedWriter(writer);
 
-            ArrayList<Stock> stocks = Stock.getAllStock();
+            ArrayList<Stock> stocks = Stock.getAllStock(); //gets all the stock items
 
-            for (Stock stock : stocks) {
+            for (Stock stock : stocks) { //writes the stock items to the file
                 buffer = stock.writeBuffer(buffer);
             }
 
-            buffer.write("Total Stock Value: £" + Stock.getTotalStockValue() + "\n");
+            buffer.write("Total Stock Value: £" + Stock.getTotalStockValue() + "\n"); //writes the total stock value to the file
 
-            buffer.close();
+            buffer.close(); 
 
         } catch (Exception e) {
             throw new RuntimeException(e);

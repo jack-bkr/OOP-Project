@@ -68,7 +68,7 @@ public class InfoController {
     @FXML private Label dateRegisteredLabel;
     @FXML private Label dateRegisteredValueLabel;
     
-    public void recieveCurrentUser(User user) {
+    public void recieveCurrentUser(User user) { //recieves the current user
         this.currentUser = user;
         if (!user.getIsAdmin()) {
             toggleAdminButton.setDisable(true);
@@ -77,7 +77,7 @@ public class InfoController {
         }
     }
     
-    public void recieveStock(Stock stock) {
+    public void recieveStock(Stock stock) { //recieves the stock
         this.table = "Stock";
         this.stock = stock;
 
@@ -123,7 +123,7 @@ public class InfoController {
         sellPriceValueLabel.setText(String.valueOf(stock.getSellPrice()));
     }
 
-    public void recieveProduct(Product product) {
+    public void recieveProduct(Product product) { //recieves the product
         this.table = "Product";
         this.product = product;
 
@@ -148,7 +148,7 @@ public class InfoController {
         productDescriptionValueLabel.setText(product.getProductDescription());
     }
 
-    public void recieveVehicle(Vehicle vehicle) {
+    public void recieveVehicle(Vehicle vehicle) { //recieves the vehicle
         this.table = "Vehicle";
         this.vehicle = vehicle;
 
@@ -174,7 +174,7 @@ public class InfoController {
         vehicleModelValueLabel.setText(vehicle.getVehicleModel());
     }
 
-    public void recieveUser(User user) {
+    public void recieveUser(User user) { //recieves the user
         this.table = "User";
         this.user = user;
 
@@ -208,15 +208,15 @@ public class InfoController {
         }
     }
 
-    public void deleteInfo(boolean success) {
-        if (success) {
+    public void deleteInfo(boolean success) { 
+    if (success) { //success message for deleting an item
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Item Deleted");
             alert.setContentText("The item has been successfully deleted.");
             alert.showAndWait();
             
-        } else {
+        } else { //error message for deleting an item
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Item Not Deleted");
@@ -226,28 +226,28 @@ public class InfoController {
     }
 
     @FXML
-    protected void handleProductInfoButton(ActionEvent event) {
+    protected void handleProductInfoButton(ActionEvent event) { //loads the product info page
         stock.product.loadInfo(currentUser);
     }
 
     @FXML
-    protected void handleVehicleInfoButton(ActionEvent event) {
+    protected void handleVehicleInfoButton(ActionEvent event) { //loads the vehicle info page
         stock.vehicle.loadInfo(currentUser);
     }
 
     @FXML
-    protected void handleToggleAdminButton(ActionEvent event) {
+    protected void handleToggleAdminButton(ActionEvent event) { //toggles the admin status of a user
         if (user.toggleAdmin()) {
-            isAdminValueLabel.setText(String.valueOf(user.getIsAdmin()));
+            isAdminValueLabel.setText(String.valueOf(user.getIsAdmin())); // checks if the user is an admin to set the button text
             if (user.getIsAdmin()) { toggleAdminButton.setText("Remove Admin"); }
             else { toggleAdminButton.setText("Make Admin"); }
             
-            Alert alert = new Alert(AlertType.INFORMATION);
+            Alert alert = new Alert(AlertType.INFORMATION); //success message for changing the admin status
             alert.setTitle("Success");
             alert.setHeaderText("Admin Status Changed");
             alert.setContentText("The user's admin status has been successfully changed.");
             alert.showAndWait();
-        } else {
+        } else { //error message for changing the admin status
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Admin Status Not Changed");
@@ -257,8 +257,8 @@ public class InfoController {
     }
 
     @FXML
-    protected void handleApproveButton(ActionEvent event) {
-        if (user.approveUser()) {
+    protected void handleApproveButton(ActionEvent event) { //approves a user
+        if (user.approveUser()) { //success message for approving a user
             isAdminApprovedValueLabel.setText(String.valueOf(user.getAdminApproved()));
             approveButton.setVisible(false);
 
@@ -267,7 +267,7 @@ public class InfoController {
             alert.setHeaderText("Approval Status Changed");
             alert.setContentText("This user is now approved.");
             alert.showAndWait();
-        } else {
+        } else { //error message for approving a user
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Approval Not Changed");
@@ -277,7 +277,7 @@ public class InfoController {
     }
 
     @FXML
-    protected void handleDeleteButton(ActionEvent event) {
+    protected void handleDeleteButton(ActionEvent event) { //deletes an item
         String alertContext = "Are you sure you want to delete ";
 
         if (table == "Stock") {
@@ -292,13 +292,13 @@ public class InfoController {
             alertContext += userNameValueLabel.getText();
         }
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION); //confirmation message for deleting an item
         alert.setTitle("Confirm Delete");
         alert.setHeaderText("Confirm Deletion");
         alert.setContentText(alertContext);
         alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
+        if (alert.getResult() == ButtonType.OK) { //if the user confirms the deletion, delete the item and display a success/error message
             if (table == "Stock") {
                 deleteInfo(stock.deleteItem());
             } else if (table == "Product") {
@@ -313,12 +313,12 @@ public class InfoController {
     }
     
     @FXML
-    protected void handleBuySellButton(ActionEvent event) {
+    protected void handleBuySellButton(ActionEvent event) { //loads the buy/sell page
         stock.buySell();
     }
 
     @FXML
-    protected void handlePrintButton(ActionEvent event) {
+    protected void handlePrintButton(ActionEvent event) { //prints the info of the item
         stock.printInfo();
     }
 }

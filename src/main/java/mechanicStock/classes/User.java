@@ -36,7 +36,7 @@ public class User {
         return userPassword.equals(password);
     }
 
-    public void loadInfo(User user) {
+    public void loadInfo(User user) { //loads the info page for the user
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
@@ -56,7 +56,7 @@ public class User {
         }
     }
 
-    public boolean deleteItem() {
+    public boolean deleteItem() { //deletes the user from the database
         String query = "DELETE FROM Users WHERE userID = " + this.userID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -73,10 +73,10 @@ public class User {
         }
 
         dbController.closeConnection(conn);
-        return success;
+        return success; //returns true if the User was deleted successfully
     }
 
-    public boolean toggleAdmin() {
+    public boolean toggleAdmin() { //toggles the admin status of the user
         String query = "UPDATE Users SET isAdmin = " + !this.isAdmin + " WHERE userID = " + this.userID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -90,14 +90,14 @@ public class User {
             throw new RuntimeException(e);
         } finally {
             success = true;
-            this.isAdmin = !this.isAdmin;
+            this.isAdmin = !this.isAdmin; //toggles the admin status, in the class to reflect the change
         }
 
         dbController.closeConnection(conn);
-        return success;
+        return success; //returns true if the user's admin status was toggled successfully
     }
 
-    public boolean approveUser() {
+    public boolean approveUser() { //approves the user
         String query = "UPDATE Users SET adminApproved = TRUE WHERE userID = " + this.userID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -115,10 +115,10 @@ public class User {
         }
 
         dbController.closeConnection(conn);
-        return success;
+        return success; //returns true if the user was approved successfully
     }
 
-    public static User getUserByUserName(String userName) {
+    public static User getUserByUserName(String userName) { //gets a user by their username
         String query = "SELECT * FROM Users WHERE userName = '" + userName + "';";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -129,7 +129,7 @@ public class User {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                user = new User(rs.getInt("userID"),
+                user = new User(rs.getInt("userID"), //creates a new user object with the data from the database
                         rs.getString("userName"),
                         rs.getString("userPassword"),
                         rs.getBoolean("isAdmin"),
@@ -147,7 +147,7 @@ public class User {
         return user;
     }
 
-    public static User getUserByID(int ID) {
+    public static User getUserByID(int ID) { //gets a user by their ID
         String query = "SELECT * FROM Users WHERE userID = " + ID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -158,7 +158,7 @@ public class User {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                user = new User(rs.getInt("userID"),
+                user = new User(rs.getInt("userID"), //creates a new user object with the data from the database
                         rs.getString("userName"),
                         rs.getString("userPassword"),
                         rs.getBoolean("isAdmin"),
@@ -176,7 +176,7 @@ public class User {
         return user;
     }
     
-    public static ArrayList<User> getAllUsers() {
+    public static ArrayList<User> getAllUsers() { //gets all users from the database
         String query = "SELECT * FROM Users;";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -187,13 +187,13 @@ public class User {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                User user = new User(rs.getInt("userID"),
+                User user = new User(rs.getInt("userID"), //creates a new user object with the data from the database
                         rs.getString("userName"),
                         rs.getString("userPassword"),
                         rs.getBoolean("isAdmin"),
                         rs.getTimestamp("dateRegistered"),
                         rs.getBoolean("adminApproved"));
-                users.add(user);
+                users.add(user); //adds the user to the arraylist
             }
 
             stmt.close();
@@ -206,7 +206,7 @@ public class User {
         return users;
     }
 
-    public static boolean registerUser(String username, String password) {
+    public static boolean registerUser(String username, String password) { //registers a new user
         String query = "INSERT INTO Users (userName, userPassword, isAdmin, dateRegistered, adminApproved) VALUES ('" + username + "', '" + password + "', FALSE, CURRENT_TIMESTAMP, FALSE);";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -223,6 +223,6 @@ public class User {
         }
 
         dbController.closeConnection(conn);
-        return success;
+        return success; //returns true if the user was registered successfully
     }
 }

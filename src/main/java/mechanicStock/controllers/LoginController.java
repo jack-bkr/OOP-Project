@@ -24,28 +24,28 @@ public class LoginController {
     @FXML private PasswordField passwordTextField;
     
 
-    public void initialize() {
+    public void initialize() { //initializes the program
         File f = new File(dbController.getPath() + "\\mechanicStockDB.sqlite");
         ArrayList<InputStream> vIS = new ArrayList<>();
         ArrayList<InputStream> pIS = new ArrayList<>();
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) { //loads the images for the vehicles
             vIS.add(getClass().getClassLoader().getResourceAsStream("img/vehicle/" + i + ".png"));
         }
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 8; i++) { //loads the images for the products
             pIS.add(getClass().getClassLoader().getResourceAsStream("img/product/" + i + ".png"));
         }
 
-        if (!f.exists()) {
+        if (!f.exists()) { //if the database file does not exist, create it
             try {
                 InputStream dbIS = getClass().getClassLoader().getResourceAsStream("mechanicStockDB.sqlite");
-                Files.copy(dbIS, Paths.get(dbController.getPath() + "/mechanicStockDB.sqlite"));
-                Files.createDirectories(Paths.get(dbController.getPath() + "/img/product"));
-                Files.createDirectories(Paths.get(dbController.getPath() + "/img/vehicle"));
-                for (int i = 1; i <= 5; i++) {
+                Files.copy(dbIS, Paths.get(dbController.getPath() + "/mechanicStockDB.sqlite")); //copy the database file
+                Files.createDirectories(Paths.get(dbController.getPath() + "/img/product")); //create the directories for product images
+                Files.createDirectories(Paths.get(dbController.getPath() + "/img/vehicle")); //create the directories for vehicle images
+                for (int i = 1; i <= 5; i++) { //copy the images for the vehicles
                     Files.copy(vIS.get(i - 1), Paths.get(dbController.getPath() + "/img/vehicle/" + i + ".png"));
                 }
-                for (int i = 1; i <= 8; i++) {
+                for (int i = 1; i <= 8; i++) { //copy the images for the products
                     Files.copy(pIS.get(i - 1), Paths.get(dbController.getPath() + "/img/product/" + i + ".png"));
                 }
             } catch (IOException e) {
@@ -55,10 +55,10 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleLoginButtonAction(ActionEvent event) throws Exception {
+    protected void handleLoginButtonAction(ActionEvent event) throws Exception { //handles the login button
         User user = getUser(userNameTextField.getText());
 
-        if (user == null || !user.checkPassword(passwordTextField.getText())) {
+        if (user == null || !user.checkPassword(passwordTextField.getText())) { //if the user does not exist or the password is incorrect, show an error message
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Username/Password");
@@ -67,7 +67,7 @@ public class LoginController {
             return;
         }
 
-        if (!user.getAdminApproved()) {
+        if (!user.getAdminApproved()) { //if the user is not approved by an admin, show an error message
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Account Not Approved");
@@ -75,6 +75,8 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
+
+        //if the user is valid, load the main app
 
         Stage stage = (Stage) loginButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/MainApp.fxml"));
@@ -91,7 +93,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleRegisterButtonAction(ActionEvent event) throws Exception {
+    protected void handleRegisterButtonAction(ActionEvent event) throws Exception { //handles the register button
         try { 
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Add.fxml"));

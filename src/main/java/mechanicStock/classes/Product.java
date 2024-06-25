@@ -29,7 +29,7 @@ public class Product {
         this.productDescription = Description;
     }
 
-    public void loadInfo(User user) {
+    public void loadInfo(User user) { //loads the info page for the product
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
@@ -49,7 +49,7 @@ public class Product {
         }
     }
 
-    public Image getImage(int width, int height) {
+    public Image getImage(int width, int height) { //returns the image of the product
         InputStream is;
         try {
             is = new FileInputStream(path + "/img/product/" + this.productID + ".png");
@@ -62,11 +62,11 @@ public class Product {
     }
 
     @Override
-    public String toString() {
+    public String toString() { //overrides the toString method to return the product name, this is for comboboxes
         return this.productName;
     }
 
-    public boolean deleteItem() {
+    public boolean deleteItem() { //deletes the product from the database
         String query = "DELETE FROM Stock WHERE productID = " + this.productID + ";" +
         "DELETE FROM Products WHERE productID = " + this.productID + ";";
         Connection conn = dbController.openConnection();
@@ -85,7 +85,7 @@ public class Product {
         
         dbController.closeConnection(conn);
 
-        return success;
+        return success; //returns true if the product was deleted successfully
     }
 
     public static Product getProductByID(int ID) {
@@ -99,7 +99,7 @@ public class Product {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                product = new Product(rs.getInt("productID"),
+                product = new Product(rs.getInt("productID"), //creates a new product object with the data from the database
                         rs.getString("productName"),
                         rs.getString("productDescription"));
             }
@@ -125,7 +125,7 @@ public class Product {
 
             ResultSet rs = stmt.executeQuery(query);
 
-            while (rs.next()) {
+            while (rs.next()) { //for each product in the database, create a new product object and add it to the arraylist
                 products.add(new Product(rs.getInt("productID"),
                         rs.getString("productName"),
                         rs.getString("productDescription")));
@@ -140,7 +140,7 @@ public class Product {
         return products;
     }
     
-    public static int addProduct(String name, String description) {
+    public static int addProduct(String name, String description) { //adds a new product to the database
         String query = "INSERT INTO Products (productName, productDescription) VALUES ('" + name + "', '" + description + "');";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -150,7 +150,7 @@ public class Product {
             stmt = conn.createStatement();
             stmt.executeUpdate(query);
 
-            ResultSet rs = stmt.getGeneratedKeys();
+            ResultSet rs = stmt.getGeneratedKeys(); //gets the productID of the new product
             if (rs.next()) {
                 productID = rs.getInt(1);
             }
@@ -161,6 +161,6 @@ public class Product {
         }
 
         dbController.closeConnection(conn);
-        return productID;
+        return productID; //returns the productID of the new product
     }
 }

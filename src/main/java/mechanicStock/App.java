@@ -8,7 +8,7 @@ import javafx.scene.*;
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception { //starts the program
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Login.fxml"));
 
         Scene scene = new Scene(root, 300, 275);

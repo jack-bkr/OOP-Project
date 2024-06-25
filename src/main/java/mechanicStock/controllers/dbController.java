@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.*;
 
 public class dbController {
-    public static String getPath() {
+    public static String getPath() { //gets the path of the jar file
         String currentPath = "";
         try{
             File file = new File(dbController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
@@ -16,7 +16,7 @@ public class dbController {
         return currentPath;
     }
         
-    public static Connection openConnection() {
+    public static Connection openConnection() { //opens a connection to the database
         String dbURL = "jdbc:sqlite:" + getPath() + "/mechanicStockDB.sqlite";
         Connection conn = null;
 
@@ -31,7 +31,7 @@ public class dbController {
         return conn;
     }
 
-    public static void closeConnection(Connection conn) {
+    public static void closeConnection(Connection conn) { //closes the connection to the database
         try {
             conn.close();
         } catch (SQLException e) {

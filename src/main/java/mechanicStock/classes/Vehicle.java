@@ -29,7 +29,7 @@ public class Vehicle {
         this.vehicleModel = Model;
     }
 
-    public void loadInfo(User user) {
+    public void loadInfo(User user) { //loads the info page for the vehicle
         try {
             Stage stage = (new Stage());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Info.fxml"));
@@ -49,7 +49,7 @@ public class Vehicle {
         }
     }
 
-    public Image getImage(int width, int height) {
+    public Image getImage(int width, int height) { //returns the image of the vehicle
         InputStream is;
         try {
             is = new FileInputStream(path + "/img/vehicle/" + this.vehicleID + ".png");
@@ -63,11 +63,11 @@ public class Vehicle {
     }
     
     @Override
-    public String toString() {
+    public String toString() { //overrides the toString method to return the vehicle make and model, this is for comboboxes
         return this.vehicleMake + " " + this.vehicleModel;
     }
 
-    public boolean deleteItem() {
+    public boolean deleteItem() { //deletes the vehicle from the database
         String query = "DELETE FROM Stock WHERE vehicleID = " + this.vehicleID + ";" +
         "DELETE FROM Vehicles WHERE vehicleID = " + this.vehicleID + ";";
         Connection conn = dbController.openConnection();
@@ -85,10 +85,10 @@ public class Vehicle {
         }
 
         dbController.closeConnection(conn);
-        return success;
+        return success; //returns true if the vehicle was deleted successfully
     }
 
-    public static Vehicle getVehicleByID(int ID) {
+    public static Vehicle getVehicleByID(int ID) { //returns a vehicle object based on the ID
         String query = "SELECT * FROM Vehicles WHERE vehicleID = " + ID + ";";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -99,7 +99,7 @@ public class Vehicle {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                vehicle = new Vehicle(rs.getInt("vehicleID"),
+                vehicle = new Vehicle(rs.getInt("vehicleID"), //creates a new vehicle object with the data from the database
                         rs.getString("vehicleMake"),
                         rs.getString("vehicleModel"));
             }
@@ -110,10 +110,10 @@ public class Vehicle {
         }
 
         dbController.closeConnection(conn);
-        return vehicle;
+        return vehicle; 
     }
 
-    public static ArrayList<Vehicle> getAllVehicles() {
+    public static ArrayList<Vehicle> getAllVehicles() { //returns an arraylist of all vehicles in the database
         String query = "SELECT * FROM Vehicles;";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -124,10 +124,10 @@ public class Vehicle {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                Vehicle vehicle = new Vehicle(rs.getInt("vehicleID"),
+                Vehicle vehicle = new Vehicle(rs.getInt("vehicleID"), //creates a new vehicle object with the data from the database
                         rs.getString("vehicleMake"),
                         rs.getString("vehicleModel"));
-                vehicles.add(vehicle);
+                vehicles.add(vehicle); //adds the vehicle to the arraylist
             }
 
             stmt.close();
@@ -140,7 +140,7 @@ public class Vehicle {
 
     }
     
-    public static int addVehicle(String make, String model) {
+    public static int addVehicle(String make, String model) { //adds a vehicle to the database
         String query = "INSERT INTO Vehicles (vehicleMake, vehicleModel) VALUES ('" + make + "', '" + model + "');";
         Connection conn = dbController.openConnection();
         Statement stmt = null;
@@ -153,7 +153,7 @@ public class Vehicle {
             rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
-                vehicleID = rs.getInt(1);
+                vehicleID = rs.getInt(1); //gets the vehicleID of the new vehicle
             }
 
             stmt.close();

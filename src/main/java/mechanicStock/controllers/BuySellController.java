@@ -26,14 +26,14 @@ public class BuySellController {
     }
     
     @FXML
-    protected void handleBuySellButtonAction() {
-        if (stock.setQuantity(quantitySpinner.getValue())) {
+    protected void handleBuySellButtonAction() { //handles the buy/sell button
+        if (stock.setQuantity(quantitySpinner.getValue())) { //updates the quantity of the stock 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Transaction Successful");
             alert.setContentText("Transaction completed successfully, quantity updated.");
             alert.showAndWait();
-        } else {
+        } else { //if the transaction fails, show an error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Transaction Failed");
@@ -45,16 +45,16 @@ public class BuySellController {
     }
 
     @FXML
-    protected void handleSpinnerChange() {
-        if (quantitySpinner.getValue() < stock.getStockQuantity()) {
+    protected void handleSpinnerChange() { //handles the spinner change
+        if (quantitySpinner.getValue() < stock.getStockQuantity()) { //if the quantity is less than the stock quantity, calculate the value of the stock and set button to sell
             value.setText("+£" + (stock.getSellPrice() * (stock.getStockQuantity() - quantitySpinner.getValue())));
             buySellButton.setText("Sell");
             buySellButton.disableProperty().set(false);
-        } else if (quantitySpinner.getValue() > stock.getStockQuantity()){
+        } else if (quantitySpinner.getValue() > stock.getStockQuantity()){ //if the quantity is more than the stock quantity, calculate the value of the stock and set button to buy
             value.setText("-£" + (stock.getBuyPrice() * (quantitySpinner.getValue() - stock.getStockQuantity())));
             buySellButton.setText("Buy");
             buySellButton.disableProperty().set(false);
-        } else {
+        } else { //if the quantity is equal to the stock quantity, set the value to 0 and disable the button
             value.setText("£0");
             buySellButton.disableProperty().set(true);
         }

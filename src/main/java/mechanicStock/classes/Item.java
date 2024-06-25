@@ -20,7 +20,7 @@ public class Item extends Stock {
     public static ArrayList<Item> getAllItems() {   //returns an arraylist of all items in the stock
         ArrayList<Item> items = new ArrayList<Item>();
 
-        for (Stock stock : Stock.getAllStock()) {
+        for (Stock stock : Stock.getAllStock()) { //for each stock item, create an item object and add it to the arraylist
             Item item = new Item(stock.getStockID(), stock.getProductID(), stock.getVehicleID(),
                     stock.getStockQuantity(), stock.getBuyPrice(), stock.getSellPrice());
             items.add(item);
